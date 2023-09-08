@@ -1,0 +1,22 @@
+{
+  "$schema": "https://raw.githubusercontent.com/microsoft/vcpkg-tool/main/docs/vcpkg.schema.json",
+  "name": "plugin-name",
+  "version-semver": "0.0.1",
+  "dependencies": ["commonlibsf", "simpleini"],
+  "license": "GPL-3.0-or-later",
+  "vcpkg-configuration": {
+    "default-registry": {
+      "kind": "git",
+      "repository": "https://github.com/microsoft/vcpkg",
+      "baseline": "7b5ca09708ae42dba9517d4e0a0c975d087f1061"
+    },
+    "registries": [
+      {
+        "kind": "git",
+        "repository": "https://github.com/Starfield-Reverse-Engineering/Starfield-RE-vcpkg",
+        "baseline": "4afa6c12061c02adb56f996eb09e029d4a9b0fc8",
+        "packages": ["commonlibsf"]
+      }
+    ]
+  }
+}
