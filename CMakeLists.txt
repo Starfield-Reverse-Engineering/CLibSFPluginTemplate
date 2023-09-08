@@ -50,13 +50,13 @@ source_group(
 ########################################################################################################################
 find_package(CommonLibSF CONFIG REQUIRED)
 
-add_library("${PROJECT_NAME}" SHARED)
-
-find_path(SIMPLEINI_INCLUDE_DIRS "SimpleIni.h")
+add_library("${PROJECT_NAME}" SHARED ${sources})
 
 target_link_libraries(${PROJECT_NAME}
         PRIVATE
         CommonLibSF::CommonLibSF)
+
+find_path(SIMPLEINI_INCLUDE_DIRS "SimpleIni.h")
 
 target_include_directories(${PROJECT_NAME}
         PRIVATE

@@ -94,7 +94,7 @@
 #include <vector>
 #include <version>
 
-#include <RE/Skyrim.h>
+#include <RE/Starfield.h>
 #include <REL/Relocation.h>
 #include <SFSE/SFSE.h>
 
@@ -110,7 +110,7 @@
 using namespace std::literals;
 using namespace REL::literals;
 
-namespace logger = SFSE::log;
+// namespace logger = SFSE::log;
 
 template <typename T>
 class Singleton
@@ -132,29 +132,29 @@ public:
     }
 };
 
-namespace stl
-{
-    using namespace SFSE::stl;
-
-    template <typename T>
-    constexpr void write_thunk_call() noexcept
-    {
-        SFSE::AllocTrampoline(14);
-        auto& trampoline{ SFSE::GetTrampoline() };
-        T::func = trampoline.write_call<5>(T::address, T::Thunk);
-    }
-
-    template <typename TDest, typename TSource>
-    constexpr void write_vfunc() noexcept
-    {
-        REL::Relocation<std::uintptr_t> vtbl{ TDest::VTABLE[0] };
-        TSource::func = vtbl.write_vfunc(TSource::idx, TSource::Thunk);
-    }
-
-    template <typename T>
-    constexpr void write_vfunc(const REL::VariantID variant_id) noexcept
-    {
-        REL::Relocation<std::uintptr_t> vtbl{ variant_id };
-        T::func = vtbl.write_vfunc(T::idx, T::Thunk);
-    }
-} // namespace stl
+// namespace stl
+//{
+//     using namespace SFSE::stl;
+//
+//     template <typename T>
+//     constexpr void write_thunk_call() noexcept
+//     {
+//         SFSE::AllocTrampoline(14);
+//         auto& trampoline{ SFSE::GetTrampoline() };
+//         T::func = trampoline.write_call<5>(T::address, T::Thunk);
+//     }
+//
+//     template <typename TDest, typename TSource>
+//     constexpr void write_vfunc() noexcept
+//     {
+//         REL::Relocation<std::uintptr_t> vtbl{ TDest::VTABLE[0] };
+//         TSource::func = vtbl.write_vfunc(TSource::idx, TSource::Thunk);
+//     }
+//
+//     template <typename T>
+//     constexpr void write_vfunc(const REL::VariantID variant_id) noexcept
+//     {
+//         REL::Relocation<std::uintptr_t> vtbl{ variant_id };
+//         T::func = vtbl.write_vfunc(T::idx, T::Thunk);
+//     }
+// } // namespace stl
