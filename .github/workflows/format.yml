@@ -31,5 +31,7 @@ jobs:
         uses: EndBug/add-and-commit@v9.1.3
         with:
           message: "ci: formatting"
+          committer_name: maintenance
+          committer_email: 41898282+github-actions[bot]@users.noreply.github.com
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
