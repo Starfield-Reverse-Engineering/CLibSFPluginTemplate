@@ -1,34 +1,41 @@
-#include "Events.h"
 #include "Hooks.h"
 #include "Logging.h"
 #include "Settings.h"
 
-#include "SFSE/Interfaces.h"
-
-void Listener(SFSE::MessagingInterface::Message* message)
+void Listener(SFSE::MessagingInterface::Message* message) noexcept
 {
-    if (message->type <=> SFSE::MessagingInterface::kDataLoaded == 0)
+    if (message->type <=> SFSE::MessagingInterface::kPostPostLoad == 0)
     {
         Settings::LoadSettings();
         Hooks::Install();
     }
 }
 
-SFSEPluginLoad(const SFSE::LoadInterface* skse)
+SFSEPluginLoad(const SFSE::LoadInterface* sfse)
 {
     InitializeLogging();
 
-    const auto plugin{ SFSE::PluginDeclaration::GetSingleton() };
-    const auto version{ plugin->GetVersion() };
+    logger::info("{} {} is loading...", Plugin::Name, Plugin::Version);
 
-    logger::info("{} {} is loading...", plugin->GetName(), version);
-
-    Init(skse);
+    Init(sfse);
 
     if (const auto messaging{ SFSE::GetMessagingInterface() }; !messaging->RegisterListener(Listener))
         return false;
 
-    logger::info("{} has finished loading.", plugin->GetName());
+    logger::info("{} has finished loading.", Plugin::Name);
 
     return true;
 }
+
+SFSEPluginVersion = []() noexcept {
+    SFSE::PluginVersionData data{};
+
+    data.PluginVersion(Plugin::Version);
+    data.PluginName(Plugin::Name);
+    data.AuthorName(Plugin::Author);
+    data.UsesSigScanning(false);
+    data.HasNoStructUse(true);
+    data.CompatibleVersions({ SFSE::RUNTIME_LATEST });
+
+    return data;
+}();

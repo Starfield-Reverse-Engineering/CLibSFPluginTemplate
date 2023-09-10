@@ -1,6 +1,6 @@
 #include "Settings.h"
 
-void Settings::LoadSettings()
+void Settings::LoadSettings() noexcept
 {
     logger::info("Loading settings");
 

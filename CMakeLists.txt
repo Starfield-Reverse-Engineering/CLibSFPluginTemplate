@@ -27,8 +27,14 @@ configure_file(
         ${CMAKE_CURRENT_BINARY_DIR}/version.rc
         @ONLY)
 
+configure_file(
+        ${CMAKE_CURRENT_SOURCE_DIR}/cmake/Plugin.h.in
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/Plugin.h
+        @ONLY)
+
 set(PUBLIC_HEADER_DIR "${CMAKE_CURRENT_SOURCE_DIR}/include/${PROJECT_NAME}")
 set(headers
+        include/Plugin.h
         include/Utility.h)
 
 set(sources

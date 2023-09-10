@@ -2,5 +2,5 @@
 
 namespace Hooks
 {
-    void Install();
+    void Install() noexcept;
 } // namespace Hooks

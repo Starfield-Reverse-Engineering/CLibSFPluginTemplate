@@ -5,7 +5,7 @@ void InitializeLogging() noexcept
     auto path{ SFSE::log::log_directory() };
     if (!path)
         stl::report_and_fail("Unable to lookup SFSE logs directory.");
-    *path /= SFSE::PluginDeclaration::GetSingleton()->GetName();
+    *path /= Plugin::Name;
     *path += L".log";
 
     std::shared_ptr<spdlog::logger> log;
