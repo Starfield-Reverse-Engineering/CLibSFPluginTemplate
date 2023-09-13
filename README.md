@@ -45,7 +45,7 @@ A few helper functions are provided in `PCH.h` for writing call site hooks and v
 - Virtual method swap:
 
   - ```cpp
-    struct MyHook : public Singleton<MyHook>
+    class MyHook : public Singleton<MyHook>
     {
     public:
         static HookReturnType Thunk(<args...>);
