@@ -1,11 +1,8 @@
 name: Test Build
 
 on:
-  push:
-    branches: main
-    paths:
-      - "**.h"
-      - "**.cpp"
+  repository_dispatch:
+    types: format-event
   workflow_dispatch:
 
 env:
@@ -36,8 +33,3 @@ jobs:
         with:
           configurePreset: build-${{ matrix.preset }}-msvc
           buildPreset: ${{ matrix.preset }}-msvc
-
-      - name: Repository Dispatch
-        uses: peter-evans/repository-dispatch@v2.1.2
-        with:
-          event-type: format-event
