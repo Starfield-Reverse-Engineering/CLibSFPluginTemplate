@@ -57,6 +57,7 @@ source_group(
 find_package(CommonLibSF CONFIG REQUIRED)
 
 add_library("${PROJECT_NAME}" SHARED ${sources})
+add_library("${PROJECT_NAME}::${PROJECT_NAME}" ALIAS "${PROJECT_NAME}")
 
 target_link_libraries(${PROJECT_NAME}
         PRIVATE

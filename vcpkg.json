@@ -8,13 +8,13 @@
     "default-registry": {
       "kind": "git",
       "repository": "https://github.com/microsoft/vcpkg",
-      "baseline": "962e5e39f8a25f42522f51fffc574e05a3efd26b"
+      "baseline": "da21e45c9ae689f63aa27f3a4ee0e64fe6b16494"
     },
     "registries": [
       {
         "kind": "git",
         "repository": "https://github.com/Starfield-Reverse-Engineering/Starfield-RE-vcpkg",
-        "baseline": "330ad32413ce34903242929f2752d41b9f622894",
+        "baseline": "9e739fd13c18190e71e54a6bab300c666ae1041d",
         "packages": ["commonlibsf"]
       }
     ]

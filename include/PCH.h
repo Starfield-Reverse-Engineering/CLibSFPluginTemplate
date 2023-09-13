@@ -1,9 +1,5 @@
 #pragma once
 
-#include <RE/Starfield.h>
-#include <REL/Relocation.h>
-#include <SFSE/Interfaces.h>
-#include <SFSE/SFSE.h>
 #include <algorithm>
 #include <any>
 #include <array>
@@ -98,6 +94,10 @@
 #include <version>
 
 // clang-format off
+#include <RE/Starfield.h>
+#include <REL/Relocation.h>
+#include <SFSE/SFSE.h>
+
 #include <ShlObj_core.h>
 #include <Psapi.h>
 #include <Windows.h>
@@ -152,12 +152,12 @@ namespace stl
         TSource::func = vtbl.write_vfunc(TSource::idx, TSource::Thunk);
     }
 
-    // template <typename T>
-    // constexpr void write_vfunc(const REL::VariantID variant_id) noexcept
-    //{
-    //     REL::Relocation<std::uintptr_t> vtbl{ variant_id };
-    //     T::func = vtbl.write_vfunc(T::idx, T::Thunk);
-    // }
+    template <typename T>
+    constexpr void write_vfunc(const REL::Offset a_offset) noexcept
+    {
+        REL::Relocation vtbl{ a_offset };
+        T::func = vtbl.write_vfunc(T::idx, T::Thunk);
+    }
 } // namespace stl
 
 #define SFSEPluginVersion extern "C" __declspec(dllexport) constinit SFSE::PluginVersionData SFSEPlugin_Version
