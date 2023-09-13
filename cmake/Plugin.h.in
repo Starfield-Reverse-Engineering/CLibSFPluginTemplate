@@ -7,6 +7,6 @@ namespace Plugin
     static constexpr auto Name{ "PluginName"sv };
     static constexpr auto Author{ "AuthorName"sv };
     static constexpr auto Version{
-        REL::Version{ @PROJECT_VERSION_MAJOR@, @PROJECT_VERSION_MINOR@, @PROJECT_VERSION_PATCH@, 0 }
+        REL::Version{@PROJECT_VERSION_MAJOR@, @PROJECT_VERSION_MINOR@, @PROJECT_VERSION_PATCH@, 0}
     };
 } // namespace Plugin
