@@ -1,8 +1,10 @@
 #pragma once
 
+using namespace std::string_view_literals;
+
 namespace Plugin
 {
-    static constexpr auto Name    = "@PROJECT_NAME@";
-    static constexpr auto Author  = "AuthorName";
-    static constexpr auto Version = @PROJECT_VERSION_MAJOR@u * 10000 + @PROJECT_VERSION_MINOR@u * 100 + @PROJECT_VERSION_PATCH@u;
+    static constexpr auto Name    = "PluginName"sv;
+    static constexpr auto Author  = "AuthorName"sv;
+    static constexpr auto Version = REL::Version{ @PROJECT_VERSION_MAJOR@, @PROJECT_VERSION_MINOR@, @PROJECT_VERSION_PATCH@, 0 };
 } // namespace Plugin

@@ -11,7 +11,8 @@
       "hidden": true,
       "cacheVariables": {
         "CMAKE_CXX_FLAGS": "$env{COMMONLIBSF_COMPILER} $env{COMMONLIBSF_PLATFORM} $env{COMMONLIBSF_TEXT}",
-        "CMAKE_SHARED_LINKER_FLAGS": "$env{COMMONLIBSF_LINKER}"
+        "CMAKE_SHARED_LINKER_FLAGS": "$env{COMMONLIBSF_LINKER}",
+        "CMAKE_MSVC_RUNTIME_LIBRARY": "MultiThreaded$<$<CONFIG:Debug>:Debug>DLL"
       }
     },
     {
@@ -19,8 +20,8 @@
       "hidden": true,
       "cacheVariables": {
         "CMAKE_TOOLCHAIN_FILE": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
-        "VCPKG_TARGET_TRIPLET": "x64-windows",
-        "VCPKG_HOST_TRIPLET": "x64-windows",
+        "VCPKG_TARGET_TRIPLET": "x64-windows-static-md",
+        "VCPKG_HOST_TRIPLET": "x64-windows-static-md",
         "VCPKG_OVERLAY_TRIPLETS": "${sourceDir}/cmake"
       }
     },
@@ -49,9 +50,9 @@
         "COMMONLIBSF_LINKER": "/CGTHREADS:8 /MACHINE:x64 /DEBUG:FULL"
       },
       "cacheVariables": {
-        "CMAKE_CXX_FLAGS_RELWITHDEBINFO": "/fp:fast /GL /GR- /Gw /O2 /Ob3 /Qpar /MD",
+        "CMAKE_CXX_FLAGS_RELWITHDEBINFO": "/fp:fast /GL /GR- /Gw /O2 /Ob3 /Qpar",
         "CMAKE_SHARED_LINKER_FLAGS_RELWITHDEBINFO": "/LTCG:INCREMENTAL /OPT:REF,ICF=4",
-        "CMAKE_CXX_FLAGS_DEBUG": "/Od /MDd",
+        "CMAKE_CXX_FLAGS_DEBUG": "/Od",
         "CMAKE_SHARED_LINKER_FLAGS_DEBUG": "/DEBUGTYPE:FIXUP"
       },
       "vendor": {

@@ -7,7 +7,11 @@ void Settings::LoadSettings() noexcept
     CSimpleIniA ini;
 
     ini.SetUnicode();
-    ini.LoadFile(R"(.\Data\SFSE\Plugins\PluginName.ini)");
+    if (ini.LoadFile(R"(.\Data\SFSE\Plugins\PluginName.ini)") <=> 0 < 0)
+    {
+        logger::error("ERROR: Failed to load ini");
+        return;
+    }
 
     debug_logging = ini.GetBoolValue("Log", "Debug");
 

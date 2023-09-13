@@ -15,7 +15,7 @@ SFSEPluginLoad(const SFSE::LoadInterface* sfse)
 {
     InitializeLogging();
 
-    logger::info("{} {} is loading...", Plugin::Name, Plugin::Version);
+    logger::info("{} {} is loading...", Plugin::Name, Plugin::Version.string("."sv));
 
     Init(sfse);
 
@@ -30,10 +30,10 @@ SFSEPluginLoad(const SFSE::LoadInterface* sfse)
 SFSEPluginVersion = []() noexcept {
     SFSE::PluginVersionData data{};
 
-    data.PluginVersion(Plugin::Version);
+    data.PluginVersion(Plugin::Version.pack());
     data.PluginName(Plugin::Name);
     data.AuthorName(Plugin::Author);
-    data.UsesSigScanning(false);
+    data.UsesSigScanning(true);
     data.HasNoStructUse(true);
     data.CompatibleVersions({ SFSE::RUNTIME_LATEST });
 
