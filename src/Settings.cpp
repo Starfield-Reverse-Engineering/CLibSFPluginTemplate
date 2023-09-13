@@ -21,7 +21,7 @@ void Settings::LoadSettings() noexcept
         logger::debug("Debug logging enabled");
     }
 
-    // Load settings
+    // Load settings (see simpleini readme: https://github.com/brofield/simpleini)
 
     logger::info("Loaded settings");
 }

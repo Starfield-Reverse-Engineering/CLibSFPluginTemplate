@@ -2,6 +2,8 @@
 #include "Logging.h"
 #include "Settings.h"
 
+// SFSE message listener, use this to do stuff at specific moments during runtime
+// NOTE: Currently, only kPostPostLoad is available
 void Listener(SFSE::MessagingInterface::Message* message) noexcept
 {
     if (message->type <=> SFSE::MessagingInterface::kPostPostLoad == 0)
@@ -11,6 +13,7 @@ void Listener(SFSE::MessagingInterface::Message* message) noexcept
     }
 }
 
+// Main SFSE plugin entry point, initialize everything here
 SFSEPluginLoad(const SFSE::LoadInterface* sfse)
 {
     InitializeLogging();
@@ -27,6 +30,7 @@ SFSEPluginLoad(const SFSE::LoadInterface* sfse)
     return true;
 }
 
+// Tell SFSE about this plugin
 SFSEPluginVersion = []() noexcept {
     SFSE::PluginVersionData data{};
 
