@@ -10,8 +10,8 @@
       "name": "base",
       "hidden": true,
       "cacheVariables": {
-        "CMAKE_CXX_FLAGS": "$env{COMMONLIBSSE_COMPILER} $env{COMMONLIBSSE_PLATFORM} $env{COMMONLIBSSE_TEXT}",
-        "CMAKE_SHARED_LINKER_FLAGS": "$env{COMMONLIBSSE_LINKER}"
+        "CMAKE_CXX_FLAGS": "$env{COMMONLIBSF_COMPILER} $env{COMMONLIBSF_PLATFORM} $env{COMMONLIBSF_TEXT}",
+        "CMAKE_SHARED_LINKER_FLAGS": "$env{COMMONLIBSF_LINKER}"
       }
     },
     {
@@ -19,8 +19,8 @@
       "hidden": true,
       "cacheVariables": {
         "CMAKE_TOOLCHAIN_FILE": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
-        "VCPKG_TARGET_TRIPLET": "x64-windows-skse",
-        "VCPKG_HOST_TRIPLET": "x64-windows-skse",
+        "VCPKG_TARGET_TRIPLET": "x64-windows",
+        "VCPKG_HOST_TRIPLET": "x64-windows",
         "VCPKG_OVERLAY_TRIPLETS": "${sourceDir}/cmake"
       }
     },
@@ -28,15 +28,7 @@
       "name": "win32",
       "hidden": true,
       "environment": {
-        "COMMONLIBSSE_PLATFORM": "-DWIN32_LEAN_AND_MEAN -DNOMINMAX"
-      }
-    },
-    {
-      "name": "win32-unicode",
-      "hidden": true,
-      "inherits": "win32",
-      "environment": {
-        "COMMONLIBSSE_TEXT": "-DUNICODE -D_UNICODE"
+        "COMMONLIBSF_PLATFORM": "-DWIN32_LEAN_AND_MEAN -DNOMINMAX"
       }
     },
     {
@@ -53,11 +45,11 @@
       "generator": "Ninja",
       "cmakeExecutable": "C:/Program Files/CMake/bin/",
       "environment": {
-        "COMMONLIBSSE_COMPILER": "/cgthreads8 /diagnostics:caret /EHsc /fp:contract /fp:except- /guard:cf- /MP /permissive- /sdl /W4 /Zc:__cplusplus /Zc:enumTypes /Zc:lambda /Zc:preprocessor /Zc:referenceBinding /Zc:rvalueCast /Zc:templateScope /Zc:ternary",
-        "COMMONLIBSSE_LINKER": "/CGTHREADS:8 /MACHINE:x64 /DEBUG:FULL"
+        "COMMONLIBSF_COMPILER": "/cgthreads8 /diagnostics:caret /EHsc /fp:contract /fp:except- /guard:cf- /MP /permissive- /sdl /W4 /Zc:__cplusplus /Zc:enumTypes /Zc:lambda /Zc:preprocessor /Zc:referenceBinding /Zc:rvalueCast /Zc:templateScope /Zc:ternary",
+        "COMMONLIBSF_LINKER": "/CGTHREADS:8 /MACHINE:x64 /DEBUG:FULL"
       },
       "cacheVariables": {
-        "CMAKE_CXX_FLAGS_RELWITHDEBINFO": "/fp:fast /GL /GR- /Gw /O2 /Ob3 /Qpar /Qvec",
+        "CMAKE_CXX_FLAGS_RELWITHDEBINFO": "/fp:fast /GL /GR- /Gw /O2 /Ob3 /Qpar /MD",
         "CMAKE_SHARED_LINKER_FLAGS_RELWITHDEBINFO": "/LTCG:INCREMENTAL /OPT:REF,ICF=4",
         "CMAKE_CXX_FLAGS_DEBUG": "/Od /MDd",
         "CMAKE_SHARED_LINKER_FLAGS_DEBUG": "/DEBUGTYPE:FIXUP"
@@ -72,7 +64,7 @@
     },
     {
       "name": "build-release-msvc",
-      "inherits": ["base", "vcpkg", "win32-unicode", "x64", "msvc"],
+      "inherits": ["base", "vcpkg", "x64", "msvc"],
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "RelWithDebInfo"
       },
@@ -82,7 +74,7 @@
     },
     {
       "name": "build-debug-msvc",
-      "inherits": ["base", "vcpkg", "win32-unicode", "x64", "msvc"],
+      "inherits": ["base", "vcpkg", "x64", "msvc"],
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Debug"
       },
