@@ -2,6 +2,8 @@
 
 ## Setup
 
+### Manual
+
 1. Clone the repository
 2. Set the `"name"` and `"version-semver"` fields in `vcpkg.json`
 3. Update the `"baseline"` entries to the latest commits in both registries in `vcpkg.json`
@@ -10,6 +12,8 @@
 5. Set the `Author` variable in `cmake/Plugin.h.in` to your name
 6. Set the name of `contrib/Config/PluginName.ini` to the name of your plugin
 7. Edit the `ini.LoadFile()` call in `src/Settings.cpp` to load the renamed ini from step 6
+
+### Automatic
 
 A python script, `project_setup.py`, is provided which automates the above steps (requires [Python 3.12+](https://www.python.org/download/pre-releases/)). To run the script:
 
@@ -35,4 +39,4 @@ A python script, `project_setup.py`, is provided which automates the above steps
   - Create a new Windows environment variable called `VCPKG_ROOT` which points to your vcpkg install directory
 - [CMake v3.27+](https://cmake.org/)
 - [LLVM v16.0.6+](https://github.com/llvm/llvm-project/releases)
-- Visual Studio 2022 with C++ workload
+- [Visual Studio 2022](https://visualstudio.microsoft.com/downloads/) with C++ workload
