@@ -3,6 +3,12 @@ name: Format
 on:
   push:
     branches: main
+    paths:
+      - "**.json"
+      - "**.yml"
+  repository_dispatch:
+    types: format-event
+  workflow_dispatch:
 
 permissions:
   contents: write
