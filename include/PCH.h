@@ -1,14 +1,31 @@
 #pragma once
 
+#include <RE/Starfield.h>
+#include <REL/Relocation.h>
+#include <SFSE/Interfaces.h>
+#include <SFSE/SFSE.h>
+#include <algorithm>
+#include <any>
+#include <array>
+#include <atomic>
+#include <barrier>
+#include <bit>
+#include <bitset>
 #include <cassert>
 #include <cctype>
 #include <cerrno>
 #include <cfenv>
 #include <cfloat>
+#include <charconv>
+#include <chrono>
 #include <cinttypes>
 #include <climits>
 #include <clocale>
 #include <cmath>
+#include <compare>
+#include <complex>
+#include <concepts>
+#include <condition_variable>
 #include <csetjmp>
 #include <csignal>
 #include <cstdarg>
@@ -21,20 +38,6 @@
 #include <cuchar>
 #include <cwchar>
 #include <cwctype>
-
-#include <algorithm>
-#include <any>
-#include <array>
-#include <atomic>
-#include <barrier>
-#include <bit>
-#include <bitset>
-#include <charconv>
-#include <chrono>
-#include <compare>
-#include <complex>
-#include <concepts>
-#include <condition_variable>
 #include <deque>
 #include <exception>
 #include <execution>
@@ -94,21 +97,16 @@
 #include <vector>
 #include <version>
 
-#include <RE/Starfield.h>
-#include <REL/Relocation.h>
-#include <SFSE/Interfaces.h>
-#include <SFSE/SFSE.h>
-
 // clang-format off
 #include <ShlObj_core.h>
 #include <Psapi.h>
 #include <Windows.h>
 // clang-format on
 
+#include "Plugin.h"
+
 #include <spdlog/sinks/basic_file_sink.h>
 #include <spdlog/sinks/msvc_sink.h>
-
-#include "Plugin.h"
 
 using namespace std::literals;
 using namespace REL::literals;
