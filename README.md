@@ -11,11 +11,13 @@ There are a few housekeeping tasks to do before you get started developing your 
 
 ### Automatic
 
-A python script, `project_setup.py`, is provided which automates the steps in [the section below](#manual) (requires [Python 3.12+](https://www.python.org/download/pre-releases/)). To run the script:
+A python script, `project_setup.py`, is provided which automates the steps in [the section below](#manual) (requires [Python 3.12+](https://www.python.org/download/pre-releases/))\*. To run the script:
 
 1. Run `cd .\CLibSFPluginTemplate\`
 2. Run `py .\project_setup.py\`
 3. Enter your project name (in CamelCase)
+
+**\*NOTE**: If you're using Python 3.11 or below, change `onexc=onexc` to `onerror=onexc` in lines 31 and 33 in `project_setup.py`
 
 ### Manual
 
@@ -43,8 +45,6 @@ A python script, `project_setup.py`, is provided which automates the steps in [t
 ## Details
 
 ### Hook helpers
-
-A few helper functions are provided in `PCH.h` for writing call site hooks and virtual method swaps. These functions expect a class which has two or three members depending on the type of hook:
 
 - Call site hook: TODO
 - Virtual method swap:
