@@ -150,11 +150,6 @@
 
 #include "Plugin.h"
 
-#include <spdlog/sinks/basic_file_sink.h>
-#include <spdlog/sinks/msvc_sink.h>
-
-#define SFSEPluginVersion extern "C" __declspec(dllexport) constinit SFSE::PluginVersionData SFSEPlugin_Version
-
 using namespace std::literals;
 using namespace REL::literals;
 
@@ -179,30 +174,3 @@ public:
         return std::addressof(singleton);
     }
 };
-
-namespace stl
-{
-    using namespace SFSE::stl;
-
-    template <typename T>
-    constexpr void write_thunk_call() noexcept
-    {
-        SFSE::AllocTrampoline(14);
-        auto& trampoline{ SFSE::GetTrampoline() };
-        T::func = trampoline.write_call<5>(T::address, T::Thunk);
-    }
-
-    template <typename TDest, typename TSource>
-    constexpr void write_vfunc() noexcept
-    {
-        REL::Relocation vtbl{ TDest::VTABLE[0] };
-        TSource::func = vtbl.write_vfunc(TSource::idx, TSource::Thunk);
-    }
-
-    template <typename T>
-    constexpr void write_vfunc(const REL::Offset a_offset) noexcept
-    {
-        REL::Relocation vtbl{ a_offset };
-        T::func = vtbl.write_vfunc(T::idx, T::Thunk);
-    }
-} // namespace stl

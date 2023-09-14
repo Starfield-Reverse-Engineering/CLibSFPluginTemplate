@@ -1,12 +1,27 @@
 #pragma once
 
-using namespace std::string_view_literals;
+#define SFSEPluginVersion extern "C" __declspec(dllexport) constinit SFSE::PluginVersionData SFSEPlugin_Version
 
 namespace Plugin
 {
+    using namespace std::string_view_literals;
+
     static constexpr auto Name{ "@PROJECT_NAME@"sv };
     static constexpr auto Author{ "AuthorName"sv };
     static constexpr auto Version{
         REL::Version{@PROJECT_VERSION_MAJOR@, @PROJECT_VERSION_MINOR@, @PROJECT_VERSION_PATCH@, 0}
     };
 } // namespace Plugin
+
+SFSEPluginVersion = []() noexcept {
+    SFSE::PluginVersionData data{};
+
+    data.PluginVersion(Plugin::Version.pack());
+    data.PluginName(Plugin::Name);
+    data.AuthorName(Plugin::Author);
+    data.UsesSigScanning(true);
+    data.HasNoStructUse(true);
+    data.CompatibleVersions({ SFSE::RUNTIME_LATEST });
+
+    return data;
+}();

@@ -15,9 +15,9 @@ void Listener(SFSE::MessagingInterface::Message* message) noexcept
 // Main SFSE plugin entry point, initialize everything here
 SFSEPluginLoad(const SFSE::LoadInterface* sfse)
 {
-    logger::info("{} {} is loading...", Plugin::Name, Plugin::Version.string("."sv));
-
     Init(sfse);
+
+    logger::info("{} {} is loading...", Plugin::Name, Plugin::Version.string("."sv));
 
     if (const auto messaging{ SFSE::GetMessagingInterface() }; !messaging->RegisterListener(Listener))
         return false;
@@ -26,17 +26,3 @@ SFSEPluginLoad(const SFSE::LoadInterface* sfse)
 
     return true;
 }
-
-// Tell SFSE about this plugin
-SFSEPluginVersion = []() noexcept {
-    SFSE::PluginVersionData data{};
-
-    data.PluginVersion(Plugin::Version.pack());
-    data.PluginName(Plugin::Name);
-    data.AuthorName(Plugin::Author);
-    data.UsesSigScanning(true);
-    data.HasNoStructUse(true);
-    data.CompatibleVersions({ SFSE::RUNTIME_LATEST });
-
-    return data;
-}();
