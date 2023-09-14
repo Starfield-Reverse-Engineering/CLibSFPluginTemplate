@@ -43,7 +43,7 @@ with open(
 ) as pluginh_file:
     pluginh = pluginh_file.read()
 
-pluginh = pluginh.replace("AuthorName", author)
+pluginh = pluginh.replace("AuthorName", author, 1)
 
 with open(
     os.path.join(cwd, "cmake\\Plugin.h.in"), "w", encoding="utf-8"
