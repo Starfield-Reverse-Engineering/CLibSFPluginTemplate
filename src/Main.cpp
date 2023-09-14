@@ -1,5 +1,4 @@
 #include "Hooks.h"
-#include "Logging.h"
 #include "Settings.h"
 
 // SFSE message listener, use this to do stuff at specific moments during runtime
@@ -16,8 +15,6 @@ void Listener(SFSE::MessagingInterface::Message* message) noexcept
 // Main SFSE plugin entry point, initialize everything here
 SFSEPluginLoad(const SFSE::LoadInterface* sfse)
 {
-    InitializeLogging();
-
     logger::info("{} {} is loading...", Plugin::Name, Plugin::Version.string("."sv));
 
     Init(sfse);

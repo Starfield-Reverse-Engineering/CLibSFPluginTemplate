@@ -38,7 +38,6 @@ set(headers
         include/Utility.h)
 
 set(sources
-        src/Logging.cpp
         src/Main.cpp
         src/Settings.cpp
         src/Hooks.cpp
