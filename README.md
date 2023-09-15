@@ -26,7 +26,7 @@ A python script, `project_setup.py`, is provided which automates the steps in [t
 3. Update the `"baseline"` entries to the latest commits in both registries in `vcpkg.json`
    - Follow the links in the `"repository"` fields and copy-paste the hash of the latest commit in each repository
 4. Set the name and version of your plugin in `CMakeLists.txt`
-5. Set the `Author` variable in `cmake/Plugin.h.in` to your name
+5. Change `"AuthorName"` in `CMakeLists.txt` to your name
 6. Set the name of `contrib/Config/PluginName.ini` to the name of your plugin
 7. Edit the `ini.LoadFile()` call in `src/Settings.cpp` to load the renamed ini from step 6
 
