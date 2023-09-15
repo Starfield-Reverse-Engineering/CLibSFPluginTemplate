@@ -43,7 +43,8 @@ set(sources
   ${CMAKE_CURRENT_BINARY_DIR}/version.rc
 )
 
-source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}
+source_group(
+  TREE ${CMAKE_CURRENT_SOURCE_DIR}
   FILES ${headers} ${sources}
 )
 
@@ -52,7 +53,8 @@ source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}
 ########################################################################################################################
 find_package(CommonLibSF CONFIG REQUIRED)
 
-add_commonlibsf_plugin(${PROJECT_NAME}
+add_commonlibsf_plugin(
+  ${PROJECT_NAME}
   AUTHOR AuthorName
   SOURCES ${headers} ${sources}
 )
@@ -61,23 +63,26 @@ add_library("${PROJECT_NAME}::${PROJECT_NAME}" ALIAS "${PROJECT_NAME}")
 
 find_path(SIMPLEINI_INCLUDE_DIRS "SimpleIni.h")
 
-target_include_directories(${PROJECT_NAME}
+target_include_directories(
+  ${PROJECT_NAME}
   PRIVATE
-  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>
-  $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/src>
-  $<INSTALL_INTERFACE:src>
-  ${SIMPLEINI_INCLUDE_DIRS}
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/src>
+    $<INSTALL_INTERFACE:src>
+    ${SIMPLEINI_INCLUDE_DIRS}
 )
 
-target_include_directories(${PROJECT_NAME}
+target_include_directories(
+  ${PROJECT_NAME}
   PUBLIC
-  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
 )
 
-target_precompile_headers(${PROJECT_NAME}
+target_precompile_headers(
+  ${PROJECT_NAME}
   PRIVATE
-  include/PCH.h
-  ${SIMPLEINI_INCLUDE_DIRS}/SimpleIni.h
+    include/PCH.h
+    ${SIMPLEINI_INCLUDE_DIRS}/SimpleIni.h
 )
 
 install(
@@ -99,22 +104,30 @@ else()
     set(BUILD_NAME "Release")
 endif()
 
-add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
-  COMMAND ${CMAKE_COMMAND} -E make_directory "${CMAKE_CURRENT_SOURCE_DIR}/contrib/Plugin${BUILD_NAME}/sfse/plugins"
+add_custom_command(
+  TARGET ${PROJECT_NAME} POST_BUILD
+  COMMAND
+    ${CMAKE_COMMAND} -E make_directory "${CMAKE_CURRENT_SOURCE_DIR}/contrib/Plugin${BUILD_NAME}/sfse/plugins"
 )
-add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
-  COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:${PROJECT_NAME}> "${CMAKE_CURRENT_SOURCE_DIR}/contrib/Plugin${BUILD_NAME}/sfse/plugins"
+add_custom_command(
+  TARGET ${PROJECT_NAME} POST_BUILD
+  COMMAND
+    ${CMAKE_COMMAND} -E copy $<TARGET_FILE:${PROJECT_NAME}> "${CMAKE_CURRENT_SOURCE_DIR}/contrib/Plugin${BUILD_NAME}/sfse/plugins"
 )
-add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
-  COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_PDB_FILE:${PROJECT_NAME}> "${CMAKE_CURRENT_SOURCE_DIR}/contrib/Plugin${BUILD_NAME}/sfse/plugins"
+add_custom_command(
+  TARGET ${PROJECT_NAME} POST_BUILD
+  COMMAND
+    ${CMAKE_COMMAND} -E copy $<TARGET_PDB_FILE:${PROJECT_NAME}> "${CMAKE_CURRENT_SOURCE_DIR}/contrib/Plugin${BUILD_NAME}/sfse/plugins"
 )
 
 file(GLOB_RECURSE OUTPUT_DLLS "${CMAKE_CURRENT_SOURCE_DIR}/contrib/**/*.dll")
 file(GLOB_RECURSE OUTPUT_PDBS "${CMAKE_CURRENT_SOURCE_DIR}/contrib/**/*.pdb")
 
-set_property(TARGET ${PROJECT_NAME}
+set_property(
+  TARGET ${PROJECT_NAME}
   APPEND PROPERTY ADDITIONAL_CLEAN_FILES "${OUTPUT_DLLS}"
 )
-set_property(TARGET ${PROJECT_NAME}
+set_property(
+  TARGET ${PROJECT_NAME}
   APPEND PROPERTY ADDITIONAL_CLEAN_FILES "${OUTPUT_PDBS}"
 )
