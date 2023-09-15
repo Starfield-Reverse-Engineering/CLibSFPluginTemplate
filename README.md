@@ -3,7 +3,7 @@
 [![C++23](https://img.shields.io/static/v1?label=standard&message=c%2B%2B23&color=blue&logo=c%2B%2B&&logoColor=red&style=flat)](https://en.cppreference.com/w/cpp/compiler_support)
 [![Platform](https://img.shields.io/static/v1?label=platform&message=windows&color=dimgray&style=flat&logo=windows)]()
 [![Game version](https://img.shields.io/badge/game%20version-1.7.29-orange)]()
-[![Main CI](https://img.shields.io/github/actions/workflow/status/Starfield-Reverse-Engineering/CLibSFPluginTemplate/testbuild.yml)](https://github.com/Starfield-Reverse-Engineering/CLibSFPluginTemplate/actions/workflows/testbuild.yml)
+[![Test build](https://img.shields.io/github/actions/workflow/status/Starfield-Reverse-Engineering/CLibSFPluginTemplate/testbuild.yml)](https://github.com/Starfield-Reverse-Engineering/CLibSFPluginTemplate/actions/workflows/testbuild.yml)
 
 ## Setup
 
@@ -42,36 +42,10 @@ A python script, `project_setup.py`, is provided which automates the steps in [t
   - `Release`: Optimized release build, produces small and fast DLLs with associated PDBs
   - `Debug`: Debug build, produces DLLs and PDBs with full debug info, allowing the use of an interactive debugger
 
-## Details
-
-### Hook helpers
-
-- Call site hook: TODO
-- Virtual method swap:
-
-  - ```cpp
-    class MyHook : public Singleton<MyHook>
-    {
-    public:
-        static HookReturnType Thunk(<args...>);
-
-        inline static REL::Relocation<decltype(&Thunk)> func;
-
-        static constexpr std::size_t idx{ <index of vfunc in vtable> };
-    }
-    ```
-
-  - The hook is installed as follows:
-
-  - ```cpp
-    stl::write_vfunc<TargetClass, MyHook>();
-    ```
-  - Note `HookReturnType` and `TargetClass` are placeholder types
-
 ## Dependencies
 
+- [CMake v3.27+](https://cmake.org/)
 - [vcpkg v2023.08.09+](https://github.com/microsoft/vcpkg/releases)
   - Create a new Windows environment variable called `VCPKG_ROOT` which points to your vcpkg install directory
-- [CMake v3.27+](https://cmake.org/)
-- [LLVM v16.0.6+](https://github.com/llvm/llvm-project/releases)
 - [Visual Studio 2022](https://visualstudio.microsoft.com/downloads/) with C++ workload
+- [LLVM v17.0.0+](https://github.com/llvm/llvm-project/releases) (not really a dependency but nice to have)
