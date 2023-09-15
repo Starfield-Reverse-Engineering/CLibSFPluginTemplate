@@ -31,16 +31,18 @@ configure_file(
 
 set(PUBLIC_HEADER_DIR "${CMAKE_CURRENT_SOURCE_DIR}/include/${PROJECT_NAME}")
 
-set(headers
-  include/Utility.h
+set(
+  headers
+    include/Utility.h
 )
 
-set(sources
-  src/Main.cpp
-  src/Settings.cpp
-  src/Hooks.cpp
+set(
+  sources
+    src/Main.cpp
+    src/Settings.cpp
+    src/Hooks.cpp
 
-  ${CMAKE_CURRENT_BINARY_DIR}/version.rc
+    ${CMAKE_CURRENT_BINARY_DIR}/version.rc
 )
 
 source_group(
@@ -105,17 +107,20 @@ else()
 endif()
 
 add_custom_command(
-  TARGET ${PROJECT_NAME} POST_BUILD
+  TARGET ${PROJECT_NAME}
+  POST_BUILD
   COMMAND
     ${CMAKE_COMMAND} -E make_directory "${CMAKE_CURRENT_SOURCE_DIR}/contrib/Plugin${BUILD_NAME}/sfse/plugins"
 )
 add_custom_command(
-  TARGET ${PROJECT_NAME} POST_BUILD
+  TARGET ${PROJECT_NAME}
+  POST_BUILD
   COMMAND
     ${CMAKE_COMMAND} -E copy $<TARGET_FILE:${PROJECT_NAME}> "${CMAKE_CURRENT_SOURCE_DIR}/contrib/Plugin${BUILD_NAME}/sfse/plugins"
 )
 add_custom_command(
-  TARGET ${PROJECT_NAME} POST_BUILD
+  TARGET ${PROJECT_NAME}
+  POST_BUILD
   COMMAND
     ${CMAKE_COMMAND} -E copy $<TARGET_PDB_FILE:${PROJECT_NAME}> "${CMAKE_CURRENT_SOURCE_DIR}/contrib/Plugin${BUILD_NAME}/sfse/plugins"
 )
