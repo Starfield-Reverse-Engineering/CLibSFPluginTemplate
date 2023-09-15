@@ -1,6 +1,6 @@
 #pragma once
 
-// Define your hook structs here
+// Define your hook classes here
 namespace Hooks
 {
     void Install() noexcept;

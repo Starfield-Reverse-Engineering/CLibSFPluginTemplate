@@ -27,14 +27,8 @@ configure_file(
         ${CMAKE_CURRENT_BINARY_DIR}/version.rc
         @ONLY)
 
-configure_file(
-        ${CMAKE_CURRENT_SOURCE_DIR}/cmake/Plugin.h.in
-        ${CMAKE_CURRENT_SOURCE_DIR}/include/Plugin.h
-        @ONLY)
-
 set(PUBLIC_HEADER_DIR "${CMAKE_CURRENT_SOURCE_DIR}/include/${PROJECT_NAME}")
 set(headers
-        include/Plugin.h
         include/Utility.h)
 
 set(sources
@@ -55,12 +49,9 @@ source_group(
 ########################################################################################################################
 find_package(CommonLibSF CONFIG REQUIRED)
 
-add_library("${PROJECT_NAME}" SHARED ${sources})
-add_library("${PROJECT_NAME}::${PROJECT_NAME}" ALIAS "${PROJECT_NAME}")
+add_commonlibsf_plugin(${PROJECT_NAME} AUTHOR AuthorName SOURCES ${headers} ${sources})
 
-target_link_libraries(${PROJECT_NAME}
-        PRIVATE
-        CommonLibSF::CommonLibSF)
+add_library("${PROJECT_NAME}::${PROJECT_NAME}" ALIAS "${PROJECT_NAME}")
 
 find_path(SIMPLEINI_INCLUDE_DIRS "SimpleIni.h")
 

@@ -38,18 +38,6 @@ project_name = input("Enter project name: ")
 author = input("Enter author: ")
 pattern = re.compile(r"(?<!^)(?=[A-Z])")
 
-with open(
-    os.path.join(cwd, "cmake\\Plugin.h.in"), "r", encoding="utf-8"
-) as pluginh_file:
-    pluginh = pluginh_file.read()
-
-pluginh = pluginh.replace("AuthorName", author, 1)
-
-with open(
-    os.path.join(cwd, "cmake\\Plugin.h.in"), "w", encoding="utf-8"
-) as pluginh_file:
-    pluginh_file.write(pluginh)
-
 with open(os.path.join(cwd, "vcpkg.json"), "r", encoding="utf-8") as vcpkg_json_file:
     vcpkg_json = json.load(vcpkg_json_file)
 
@@ -69,6 +57,7 @@ with open(
     cmakelists = cmakelists_file.read()
 
 cmakelists = cmakelists.replace("PluginName", project_name)
+cmakelists = cmakelists.replace("AuthorName", author)
 cmakelists = cmakelists.replace("0.0.1", "1.0.0")
 
 with open(

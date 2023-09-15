@@ -2,9 +2,11 @@
 #include "Settings.h"
 
 // SFSE message listener, use this to do stuff at specific moments during runtime
-// NOTE: Currently, only kPostPostLoad is available
 void Listener(SFSE::MessagingInterface::Message* message) noexcept
 {
+    if (message->type <=> SFSE::MessagingInterface::kPostLoad == 0)
+    {
+    }
     if (message->type <=> SFSE::MessagingInterface::kPostPostLoad == 0)
     {
         Settings::LoadSettings();
