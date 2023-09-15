@@ -34,4 +34,4 @@ jobs:
       - name: Repository Dispatch
         uses: peter-evans/repository-dispatch@v2.1.2
         with:
-          event-type: format-event
+          event-type: build-event

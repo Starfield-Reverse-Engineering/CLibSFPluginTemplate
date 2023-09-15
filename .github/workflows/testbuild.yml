@@ -2,7 +2,7 @@ name: Test Build
 
 on:
   repository_dispatch:
-    types: format-event
+    types: build-event
   workflow_dispatch:
 
 env:
