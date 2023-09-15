@@ -42,6 +42,10 @@ A python script, `project_setup.py`, is provided which automates the steps in [t
   - `Release`: Optimized release build, produces small and fast DLLs with associated PDBs
   - `Debug`: Debug build, produces DLLs and PDBs with full debug info, allowing the use of an interactive debugger
 
+## Plugin configuration using an `.ini`
+
+Many CommonLib plugins expose settings through configuration files so that the user can control plugin behavior. This template includes [simpleini](https://github.com/brofield/simpleini) which allows you to read settings from the ini file in `contrib\config` (see `Settings.cpp`).
+
 ## Dependencies
 
 - [CMake v3.27+](https://cmake.org/)
