@@ -14,7 +14,7 @@ There are a few housekeeping tasks to do before you get started developing your 
 A python script, `project_setup.py`, is provided which automates the steps in [the section below](#manual) (requires [Python 3.12+](https://www.python.org/download/pre-releases/))\*. To run the script:
 
 1. Run `cd .\CLibSFPluginTemplate\`
-2. Run `py .\project_setup.py\`
+2. Run `py .\project_setup.py`
 3. Enter your project name (in CamelCase)
 
 **\*NOTE**: If you're using Python 3.11 or below, change `onexc=onexc` to `onerror=onexc` in lines 31 and 33 in `project_setup.py`
