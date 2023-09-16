@@ -66,18 +66,18 @@ with open(
     cmakelists_file.write(cmakelists)
 
 os.rename(
-    os.path.join(cwd, "contrib\\Config\\PluginName.ini"),
-    os.path.join(cwd, f"contrib\\Config\\{project_name}.ini"),
+    os.path.join(cwd, "contrib", "Config", "PluginName.ini"),
+    os.path.join(cwd, "contrib", "Config", f"{project_name}.ini"),
 )
 
 with open(
-    os.path.join(cwd, "src\\Settings.cpp"), "r", encoding="utf-8"
+    os.path.join(cwd, "src", "Settings.cpp"), "r", encoding="utf-8"
 ) as settings_cpp_file:
     settings_cpp = settings_cpp_file.read()
 
 settings_cpp = settings_cpp.replace("PluginName.ini", f"{project_name}.ini")
 
 with open(
-    os.path.join(cwd, "src\\Settings.cpp"), "w", encoding="utf-8"
+    os.path.join(cwd, "src", "Settings.cpp"), "w", encoding="utf-8"
 ) as settings_cpp_file:
     settings_cpp_file.write(settings_cpp)
