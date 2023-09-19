@@ -9,32 +9,14 @@
 
 This template consumes CommonLibSF either as a vcpkg port or as a git submodule. When you run the project setup script, you will be prompted to choose between the two (the default is via vcpkg).
 
-### Automatic
-
-A python script, `project_setup.py`, is provided which automates the steps in [the section below](#manual) (requires [Python 3.12+](https://www.python.org/download/pre-releases/))\*. To run the script:
+A python script, `project_setup.py`, is provided which automates several housekeeping steps required to get the template development-ready (requires [Python](https://www.python.org/download)). To run the script:
 
 1. Run `cd .\CLibSFPluginTemplate\`
 2. Run `py .\project_setup.py`
-3. Enter your project name (in CamelCase)
-
-**\*NOTE**: If you're using Python 3.11 or below, change `onexc=onexc` to `onerror=onexc` in lines 31 and 33 in `project_setup.py`
-
-### Manual
-
-#### vcpkg port
-
-1. Clone the repository
-2. Set the `"name"` and `"version-semver"` fields in `vcpkg.json`
-3. Update the `"baseline"` entries to the latest commits in both registries in `vcpkg.json`
-   - Follow the links in the `"repository"` fields and copy-paste the hash of the latest commit in each repository
-4. Set the name and version of your plugin in `CMakeLists.txt`
-5. Change `"AuthorName"` in `CMakeLists.txt` to your name
-6. Set the name of `contrib/Config/PluginName.ini` to the name of your plugin
-7. Edit the `ini.LoadFile()` call in `src/Settings.cpp` to load the renamed ini from step 6
-
-#### git submodule
-
-TODO
+3. Choose how to consume CommonLibSF
+   1. Press `Enter` to use the default of consuming CommonLibSF via vcpkg
+   2. Enter `y` to consume CommonLibSF as a git submodule instead
+4. Enter your project name (in CamelCase)
 
 ## Building your project
 
@@ -58,4 +40,5 @@ Many CommonLib plugins expose settings through configuration files so that the u
 - [vcpkg v2023.08.09+](https://github.com/microsoft/vcpkg/releases)
   - Create a new Windows environment variable called `VCPKG_ROOT` which points to your vcpkg install directory
 - [Visual Studio 2022](https://visualstudio.microsoft.com/downloads/) with C++ workload
+- [Python](https://www.python.org/download)
 - [LLVM v17.0.0+](https://github.com/llvm/llvm-project/releases) (not really a dependency but nice to have)
