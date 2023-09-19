@@ -10,6 +10,20 @@ use_submodule = (
     else (True if use_submodule_input.lower() == "y" else False)
 )
 
+build_MT_input = input("Build libraries in Multi-threaded (/MT) mode? (negative answer will build libraries in Multi-threaded DLL (/MD))  (y/n): ")
+
+if build_MT_input.lower() == "y":
+	with open('CMakePresets.json', 'r') as file:
+  		filedata = file.read()
+
+	filedata = filedata.replace('x64-windows-static-md', 'x64-windows-static')
+	filedata = filedata.replace('MultiThreaded$<$<CONFIG:Debug>:Debug>DLL', 'MultiThreaded$<$<CONFIG:Debug>:Debug>')
+
+	with open('CMakePresets.json', 'w') as file:
+  		file.write(filedata)
+
+
+
 cwd = os.path.dirname(os.path.abspath(__file__))
 
 project_name = input("Enter project name: ")
