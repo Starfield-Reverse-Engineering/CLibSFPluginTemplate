@@ -20,7 +20,7 @@ jobs:
       - name: Run Prettier
         uses: actionsx/prettier@v3
         with:
-          args: --write "${{ github.workspace }}/*.json"
+          args: --write "**.json" "**.yml"
 
       - name: Add & Commit
         uses: EndBug/add-and-commit@v9.1.3
