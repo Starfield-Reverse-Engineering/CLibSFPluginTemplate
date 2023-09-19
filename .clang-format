@@ -44,7 +44,7 @@ AllowShortLoopsOnASingleLine: false
 AlwaysBreakAfterDefinitionReturnType: None
 AlwaysBreakAfterReturnType: None
 AlwaysBreakBeforeMultilineStrings: false
-AlwaysBreakTemplateDeclarations: MultiLine
+AlwaysBreakTemplateDeclarations: Yes
 AttributeMacros:
   - __declspec
   - __try
@@ -84,7 +84,7 @@ BreakBeforeTernaryOperators: true
 BreakConstructorInitializers: BeforeColon
 BreakInheritanceList: BeforeColon
 BreakStringLiterals: true
-ColumnLimit: 0
+ColumnLimit: 160
 CommentPragmas: ""
 CompactNamespaces: false
 ConstructorInitializerIndentWidth: 4
@@ -98,7 +98,7 @@ ExperimentalAutoDetectBinPacking: false
 FixNamespaceComments: true
 ForEachMacros:
 IfMacros:
-IncludeBlocks: Regroup
+IncludeBlocks: Preserve
 IncludeCategories:
 IncludeIsMainRegex: ""
 IncludeIsMainSourceRegex: ""
@@ -159,7 +159,7 @@ RequiresClausePosition: OwnLine
 RequiresExpressionIndentation: OuterScope
 SeparateDefinitionBlocks: Leave
 ShortNamespaceLines: 1
-SortIncludes: CaseSensitive
+SortIncludes: CaseInsensitive
 SortJavaStaticImport: Before
 SortUsingDeclarations: LexicographicNumeric
 SpaceAfterCStyleCast: false

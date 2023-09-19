@@ -8,8 +8,7 @@ on:
       - "**.yml"
   workflow_dispatch:
 
-permissions:
-  contents: write
+permissions: write-all
 
 jobs:
   prettier:

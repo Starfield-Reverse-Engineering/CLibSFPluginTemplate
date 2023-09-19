@@ -14,8 +14,6 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_INTERPROCEDURAL_OPTIMIZATION ON)
 set(CMAKE_INTERPROCEDURAL_OPTIMIZATION_DEBUG OFF)
 
-message("CMAKE_SHARED_LINKER_FLAGS: ${CMAKE_SHARED_LINKER_FLAGS}")
-
 include(GNUInstallDirs)
 
 configure_file(
@@ -96,9 +94,9 @@ install(
 ## Automatic plugin deployment
 ########################################################################################################################
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
-    set(BUILD_NAME "Debug")
+  set(BUILD_NAME "Debug")
 else()
-    set(BUILD_NAME "Release")
+  set(BUILD_NAME "Release")
 endif()
 
 add_custom_command(
