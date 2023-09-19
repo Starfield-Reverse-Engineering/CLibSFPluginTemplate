@@ -7,7 +7,7 @@
 
 ## Setup
 
-There are a few housekeeping tasks to do before you get started developing your plugin.
+This template consumes CommonLibSF either as a vcpkg port or as a git submodule. When you run the project setup script, you will be prompted to choose between the two (the default is via vcpkg).
 
 ### Automatic
 
@@ -21,6 +21,8 @@ A python script, `project_setup.py`, is provided which automates the steps in [t
 
 ### Manual
 
+#### vcpkg port
+
 1. Clone the repository
 2. Set the `"name"` and `"version-semver"` fields in `vcpkg.json`
 3. Update the `"baseline"` entries to the latest commits in both registries in `vcpkg.json`
@@ -29,6 +31,10 @@ A python script, `project_setup.py`, is provided which automates the steps in [t
 5. Change `"AuthorName"` in `CMakeLists.txt` to your name
 6. Set the name of `contrib/Config/PluginName.ini` to the name of your plugin
 7. Edit the `ini.LoadFile()` call in `src/Settings.cpp` to load the renamed ini from step 6
+
+#### git submodule
+
+TODO
 
 ## Building your project
 

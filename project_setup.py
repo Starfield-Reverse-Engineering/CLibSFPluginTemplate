@@ -114,8 +114,13 @@ else:
         "add_subdirectory(extern/CommonLibSF)\n\n"
         'find_path(SPDLOG_DIR "spdlogConfig.cmake")\n'
         'find_path(FMT_DIR "fmt-config.cmake")\n'
-        'find_path(XBYAK_DIR "xbyak-config.cmake")\n\n'
-        "include(${CMAKE_CURRENT_BINARY_DIR}/extern/CommonLibSF/CommonLibSF/CommonLibSF.cmake)",
+        'find_path(XBYAK_DIR "xbyak-config.cmake")',
+    )
+
+    cmakelists = cmakelists.replace("add_commonlibsf_plugin", "target_link_libraries")
+    cmakelists = cmakelists.replace("AUTHOR AuthorName", "PRIVATE")
+    cmakelists = cmakelists.replace(
+        "SOURCES ${headers} ${sources}", "  CommonLibSF::CommonLibSF"
     )
 
     with open(
