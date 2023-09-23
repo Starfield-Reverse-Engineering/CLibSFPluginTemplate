@@ -34,6 +34,10 @@ A python script, `project_setup.py`, is provided which automates several houseke
 
 Many CommonLib plugins expose settings through configuration files so that the user can control plugin behavior. This template includes [simpleini](https://github.com/brofield/simpleini) which allows you to read settings from the ini file in `contrib\config` (see `Settings.cpp`).
 
+## License requirements
+
+This template uses CommonLibSF's GPLv3 with exceptions. Per the license, **you must share the source code of your mod if you use CommonLibSF**. Violation of the license will result in your mod being taken down from the Nexus.
+
 ## Dependencies
 
 - [CMake v3.27+](https://cmake.org/)
