@@ -17,7 +17,7 @@ void Settings::LoadSettings() noexcept
 
     if (debug_logging)
     {
-        spdlog::get("Global")->set_level(spdlog::level::level_enum::debug);
+        spdlog::set_level(spdlog::level::level_enum::debug);
         logger::debug("Debug logging enabled");
     }
 
