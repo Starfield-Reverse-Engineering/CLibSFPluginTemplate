@@ -6,6 +6,7 @@ on:
     paths:
       - "include/**"
       - "src/**"
+      - ".clang-format"
   workflow_dispatch:
 
 permissions: write-all

@@ -42,9 +42,9 @@ AttributeMacros:
   - __except
   - __assume
 BraceWrapping:
-  AfterCaseLabel: true
+  AfterCaseLabel: false
   AfterClass: true
-  AfterControlStatement: Always
+  AfterControlStatement: MultiLine
   AfterEnum: true
   AfterExternBlock: true
   AfterFunction: true
@@ -55,7 +55,7 @@ BraceWrapping:
   BeforeCatch: true
   BeforeElse: true
   BeforeLambdaBody: false
-  BeforeWhile: true
+  BeforeWhile: false
   IndentBraces: false
   SplitEmptyFunction: true
   SplitEmptyRecord: true
