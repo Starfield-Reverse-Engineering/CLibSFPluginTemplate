@@ -154,6 +154,7 @@ using namespace std::literals;
 using namespace REL::literals;
 
 namespace logger = SFSE::log;
+namespace stl = SFSE::stl;
 
 template <typename T>
 class Singleton

@@ -12,6 +12,62 @@ use_submodule = (
 
 cwd = os.path.dirname(os.path.abspath(__file__))
 
+if not use_submodule:
+    print("Using vcpkg port...\n")
+else:
+    print("Using git submodule...\n")
+    subprocess.run(
+        "git submodule add https://github.com/Starfield-Reverse-Engineering/CommonLibSF extern/CommonLibSF"
+    )
+    subprocess.run("git submodule update --init -f")
+
+    with open(
+        os.path.join(cwd, "CMakeLists.txt"), "r", encoding="utf-8"
+    ) as cmakelists_file:
+        cmakelists = cmakelists_file.read()
+
+    cmakelists = cmakelists.replace(
+        "find_package(CommonLibSF CONFIG REQUIRED)",
+        "add_subdirectory(extern/CommonLibSF)\n\n"
+        'find_path(SPDLOG_DIR "spdlogConfig.cmake")\n'
+        'find_path(FMT_DIR "fmt-config.cmake")\n'
+        'find_path(XBYAK_DIR "xbyak-config.cmake")',
+    )
+
+    cmakelists = cmakelists.replace("add_commonlibsf_plugin", "target_link_libraries")
+    cmakelists = cmakelists.replace("AUTHOR AuthorName", "PRIVATE")
+    cmakelists = cmakelists.replace(
+        "SOURCES ${headers} ${sources}", "  CommonLibSF::CommonLibSF"
+    )
+
+    with open(
+        os.path.join(cwd, "CMakeLists.txt"), "w", encoding="utf-8"
+    ) as cmakelists_file:
+        cmakelists_file.write(cmakelists)
+
+    with open(
+        os.path.join(cwd, "vcpkg.json"), "r", encoding="utf-8"
+    ) as vcpkg_json_file:
+        vcpkg_json = json.load(vcpkg_json_file)
+
+    vcpkg_json["dependencies"] = ["simpleini"]
+
+    with open(
+        os.path.join(cwd, "vcpkg.json"), "w", encoding="utf-8"
+    ) as vcpkg_json_file:
+        json.dump(vcpkg_json, vcpkg_json_file, indent=2)
+
+    with open(
+        os.path.join(cwd, "build-clibsf.bat"), "w+", encoding="utf-8"
+    ) as buildscript:
+        clibsf_dir = os.path.join(cwd, "extern", "CommonLibSF", "CommonLibSF")
+        build_dir = os.path.join(clibsf_dir, "build")
+        buildscript.write(
+            f"cd {clibsf_dir}\n"
+            f'cmake -B "{build_dir}" -S "{clibsf_dir}" --preset=build-release-msvc-ninja\n'
+            f'cmake --build "{build_dir}" --preset=release-msvc-ninja',
+        )
+
 project_name = input("Enter project name: ")
 author = input("Enter author: ")
 pattern = re.compile(r"(?<!^)(?=[A-Z])")
@@ -71,59 +127,3 @@ with open(
     os.path.join(cwd, "src", "Settings.cpp"), "w", encoding="utf-8"
 ) as settings_cpp_file:
     settings_cpp_file.write(settings_cpp)
-
-if not use_submodule:
-    print("Using vcpkg port...\n")
-else:
-    print("Using git submodule...\n")
-    subprocess.run(
-        "git submodule add https://github.com/Starfield-Reverse-Engineering/CommonLibSF extern/CommonLibSF"
-    )
-    subprocess.run("git submodule update --init -f")
-
-    with open(
-        os.path.join(cwd, "CMakeLists.txt"), "r", encoding="utf-8"
-    ) as cmakelists_file:
-        cmakelists = cmakelists_file.read()
-
-    cmakelists = cmakelists.replace(
-        "find_package(CommonLibSF CONFIG REQUIRED)",
-        "add_subdirectory(extern/CommonLibSF)\n\n"
-        'find_path(SPDLOG_DIR "spdlogConfig.cmake")\n'
-        'find_path(FMT_DIR "fmt-config.cmake")\n'
-        'find_path(XBYAK_DIR "xbyak-config.cmake")',
-    )
-
-    cmakelists = cmakelists.replace("add_commonlibsf_plugin", "target_link_libraries")
-    cmakelists = cmakelists.replace("AUTHOR AuthorName", "PRIVATE")
-    cmakelists = cmakelists.replace(
-        "SOURCES ${headers} ${sources}", "  CommonLibSF::CommonLibSF"
-    )
-
-    with open(
-        os.path.join(cwd, "CMakeLists.txt"), "w", encoding="utf-8"
-    ) as cmakelists_file:
-        cmakelists_file.write(cmakelists)
-
-    with open(
-        os.path.join(cwd, "vcpkg.json"), "r", encoding="utf-8"
-    ) as vcpkg_json_file:
-        vcpkg_json = json.load(vcpkg_json_file)
-
-    vcpkg_json["dependencies"] = ["simpleini"]
-
-    with open(
-        os.path.join(cwd, "vcpkg.json"), "w", encoding="utf-8"
-    ) as vcpkg_json_file:
-        json.dump(vcpkg_json, vcpkg_json_file, indent=2)
-
-    with open(
-        os.path.join(cwd, "build-clibsf.bat"), "w+", encoding="utf-8"
-    ) as buildscript:
-        clibsf_dir = os.path.join(cwd, "extern", "CommonLibSF", "CommonLibSF")
-        build_dir = os.path.join(clibsf_dir, "build")
-        buildscript.write(
-            f"cd {clibsf_dir}\n"
-            f'cmake -B "{build_dir}" -S "{clibsf_dir}" --preset=build-release-msvc-ninja\n'
-            f'cmake --build "{build_dir}" --preset=release-msvc-ninja',
-        )
