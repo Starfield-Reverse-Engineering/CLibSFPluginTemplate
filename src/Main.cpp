@@ -10,6 +10,8 @@ void Listener(SFSE::MessagingInterface::Message* message) noexcept
         Settings::LoadSettings();
         Hooks::Install();
     }
+    if (message->type <=> SFSE::MessagingInterface::kPostDataLoad == 0) {
+    }
 }
 
 // Main SFSE plugin entry point, initialize everything here

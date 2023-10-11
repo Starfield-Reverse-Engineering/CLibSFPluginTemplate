@@ -28,16 +28,8 @@ else:
 
     cmakelists = cmakelists.replace(
         "find_package(CommonLibSF CONFIG REQUIRED)",
-        "add_subdirectory(extern/CommonLibSF)\n\n"
-        'find_path(SPDLOG_DIR "spdlogConfig.cmake")\n'
-        'find_path(FMT_DIR "fmt-config.cmake")\n'
-        'find_path(XBYAK_DIR "xbyak-config.cmake")',
-    )
-
-    cmakelists = cmakelists.replace("add_commonlibsf_plugin", "target_link_libraries")
-    cmakelists = cmakelists.replace("AUTHOR AuthorName", "PRIVATE")
-    cmakelists = cmakelists.replace(
-        "SOURCES ${headers} ${sources}", "  CommonLibSF::CommonLibSF"
+        "add_subdirectory(extern/CommonLibSF)\n"
+        'include("extern/CommonLibSF/CommonLibSF/cmake/CommonLibSF.cmake")',
     )
 
     with open(
@@ -50,23 +42,12 @@ else:
     ) as vcpkg_json_file:
         vcpkg_json = json.load(vcpkg_json_file)
 
-    vcpkg_json["dependencies"] = ["simpleini"]
+    vcpkg_json["dependencies"] = ["simpleini", "spdlog", "xbyak"]
 
     with open(
         os.path.join(cwd, "vcpkg.json"), "w", encoding="utf-8"
     ) as vcpkg_json_file:
         json.dump(vcpkg_json, vcpkg_json_file, indent=2)
-
-    with open(
-        os.path.join(cwd, "build-clibsf.bat"), "w+", encoding="utf-8"
-    ) as buildscript:
-        clibsf_dir = os.path.join(cwd, "extern", "CommonLibSF", "CommonLibSF")
-        build_dir = os.path.join(clibsf_dir, "build")
-        buildscript.write(
-            f"cd {clibsf_dir}\n"
-            f'cmake -B "{build_dir}" -S "{clibsf_dir}" --preset=build-release-msvc-ninja\n'
-            f'cmake --build "{build_dir}" --preset=release-msvc-ninja',
-        )
 
 project_name = input("Enter project name: ")
 author = input("Enter author: ")
