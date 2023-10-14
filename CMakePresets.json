@@ -10,8 +10,8 @@
       "name": "base",
       "hidden": true,
       "cacheVariables": {
-        "CMAKE_CXX_FLAGS": "$env{COMMONLIBSF_COMPILER} $env{COMMONLIBSF_PLATFORM} $env{COMMONLIBSF_TEXT} $penv{CXXFLAGS}",
-        "CMAKE_SHARED_LINKER_FLAGS": "$env{COMMONLIBSF_LINKER}",
+        "CMAKE_CXX_FLAGS": "$env{COMMONLIBSF_COMPILER} $env{COMMONLIBSF_PLATFORM} $penv{CXXFLAGS}",
+        "CMAKE_SHARED_LINKER_FLAGS": "$env{COMMONLIBSF_LINKER} $penv{SHARED_LINKER_FLAGS}",
         "CMAKE_MSVC_RUNTIME_LIBRARY": "MultiThreaded$<$<CONFIG:Debug>:Debug>DLL"
       }
     },
@@ -56,8 +56,7 @@
       "vendor": {
         "microsoft.com/VisualStudioSettings/CMake/1.0": {
           "intelliSenseMode": "windows-msvc-x64",
-          "enableMicrosoftCodeAnalysis": true,
-          "enableClangTidyCodeAnalysis": true
+          "enableMicrosoftCodeAnalysis": true
         }
       }
     },

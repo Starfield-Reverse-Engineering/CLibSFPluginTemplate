@@ -138,15 +138,9 @@
 
 /* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 
-// clang-format off
 #include <RE/Starfield.h>
-#include <REL/Relocation.h>
+#include <REL/REL.h>
 #include <SFSE/SFSE.h>
-
-#include <ShlObj_core.h>
-#include <Psapi.h>
-#include <Windows.h>
-// clang-format on
 
 #include "Plugin.h"
 
