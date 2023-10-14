@@ -16,7 +16,10 @@ A python script, `project_setup.py`, is provided which automates several houseke
 3. Choose how to consume CommonLibSF
    1. Press `Enter` to use the default of consuming CommonLibSF via vcpkg
    2. Enter `y` to consume CommonLibSF as a git submodule instead
-4. Enter your project name (in CamelCase)
+4. To use a local fork of CommonLibSF instead of the vcpkg port or a git submodule:
+   1. Create a Windows environment variable called `CommonLibSFPath` that points to your local fork of CommonLibSF
+   2. Enter `y` when the setup script asks if you'd like to use a local fork
+5. Enter your project name (in CamelCase)
 
 ## Building your project
 

@@ -13,7 +13,45 @@ use_submodule = (
 cwd = os.path.dirname(os.path.abspath(__file__))
 
 if not use_submodule:
-    print("Using vcpkg port...\n")
+    use_local_fork_input = input("Use local fork? (y/n): ")
+    use_local_fork = (
+        False
+        if not use_local_fork_input
+        else (True if use_local_fork_input.lower() == "y" else False)
+    )
+    if use_local_fork:
+        print(
+            "NOTE: Remember to create an environment variable called CommonLibSFPath which points to your local fork\n"
+        )
+        with open(
+            os.path.join(cwd, "CMakeLists.txt"), "r", encoding="utf-8"
+        ) as cmakelists_file:
+            cmakelists = cmakelists_file.read()
+
+        cmakelists = cmakelists.replace(
+            "find_package(CommonLibSF CONFIG REQUIRED)",
+            'add_subdirectory("$ENV{CommonLibSFPath}" CommonLibSF)\n'
+            'include("$ENV{CommonLibSFPath}/CommonLibSF/cmake/CommonLibSF.cmake")',
+        )
+
+        with open(
+            os.path.join(cwd, "CMakeLists.txt"), "w", encoding="utf-8"
+        ) as cmakelists_file:
+            cmakelists_file.write(cmakelists)
+
+        with open(
+            os.path.join(cwd, "vcpkg.json"), "r", encoding="utf-8"
+        ) as vcpkg_json_file:
+            vcpkg_json = json.load(vcpkg_json_file)
+
+        vcpkg_json["dependencies"] = ["simpleini", "spdlog", "xbyak"]
+
+        with open(
+            os.path.join(cwd, "vcpkg.json"), "w", encoding="utf-8"
+        ) as vcpkg_json_file:
+            json.dump(vcpkg_json, vcpkg_json_file, indent=2)
+    else:
+        print("Using vcpkg port...\n")
 else:
     print("Using git submodule...\n")
     subprocess.run(
