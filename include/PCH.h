@@ -163,7 +163,7 @@ public:
     constexpr auto operator=(const Singleton&) = delete;
     constexpr auto operator=(Singleton&&)      = delete;
 
-    static constexpr T* GetSingleton() noexcept
+    static constexpr auto GetSingleton() noexcept
     {
         static T singleton;
         return std::addressof(singleton);
