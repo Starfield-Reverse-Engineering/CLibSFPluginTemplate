@@ -1,9 +1,12 @@
 name: Test Build
 
 on:
-  workflow_run:
-    workflows: clang-format
-    types: completed
+  push:
+    paths: 
+      - "include/**"
+      - "src/**"
+      - "CMakeLists.txt"
+      - "CMakePresets.json"
   workflow_dispatch:
 
 jobs:
