@@ -36,5 +36,5 @@ jobs:
 
       - name: Build
         run: |
-          cmake -B ./build --preset=build-${{ matrix.preset }}-${{ matrix.compiler }}
-          cmake --build ./build --preset=${{ matrix.preset }}-${{ matrix.compiler }}
+          cmake -B .\build\${{ matrix.preset }}-${{ matrix.compiler }} --preset=build-${{ matrix.preset }}-${{ matrix.compiler }}
+          cmake --build .\build\${{ matrix.preset }}-${{ matrix.compiler }} --preset=${{ matrix.preset }}-${{ matrix.compiler }}
