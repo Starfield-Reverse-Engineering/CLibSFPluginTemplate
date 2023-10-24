@@ -68,7 +68,7 @@
     },
     {
       "name": "build-release-clang-cl",
-      "inherits": [ "base", "win32", "x64", "clang-cl" ],
+      "inherits": ["base", "win32", "x64", "clang-cl"],
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "RelWithDebInfo",
         "CMAKE_CXX_FLAGS_RELWITHDEBINFO": "/fp:fast /GR- /Gw /O2"
@@ -79,7 +79,7 @@
     },
     {
       "name": "build-debug-clang-cl",
-      "inherits": [ "base", "win32", "x64", "clang-cl" ],
+      "inherits": ["base", "win32", "x64", "clang-cl"],
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Debug"
       },
@@ -89,7 +89,7 @@
     },
     {
       "name": "build-release-msvc",
-      "inherits": [ "base", "win32", "x64", "msvc" ],
+      "inherits": ["base", "win32", "x64", "msvc"],
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "RelWithDebInfo",
         "CMAKE_CXX_FLAGS_RELWITHDEBINFO": "/fp:fast /GR- /Gw /O2 /Ob3 /Qpar",
@@ -101,7 +101,7 @@
     },
     {
       "name": "build-debug-msvc",
-      "inherits": [ "base", "win32", "x64", "msvc" ],
+      "inherits": ["base", "win32", "x64", "msvc"],
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Debug",
         "CMAKE_SHARED_LINKER_FLAGS_DEBUG": "/DEBUGTYPE:FIXUP"
