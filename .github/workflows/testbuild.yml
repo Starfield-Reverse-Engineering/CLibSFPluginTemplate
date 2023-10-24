@@ -2,7 +2,8 @@ name: Test Build
 
 on:
   push:
-    paths: 
+    branches: main
+    paths:
       - "include/**"
       - "src/**"
       - "CMakeLists.txt"
