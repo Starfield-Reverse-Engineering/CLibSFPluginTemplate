@@ -12,16 +12,8 @@
       "cacheVariables": {
         "CMAKE_CXX_FLAGS": "$env{COMMONLIBSF_COMPILER} $env{COMMONLIBSF_PLATFORM} $penv{CXXFLAGS}",
         "CMAKE_SHARED_LINKER_FLAGS": "$env{COMMONLIBSF_LINKER} $penv{SHARED_LINKER_FLAGS}",
-        "CMAKE_MSVC_RUNTIME_LIBRARY": "MultiThreaded$<$<CONFIG:Debug>:Debug>DLL"
-      }
-    },
-    {
-      "name": "vcpkg",
-      "hidden": true,
-      "cacheVariables": {
-        "CMAKE_TOOLCHAIN_FILE": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
-        "VCPKG_TARGET_TRIPLET": "x64-windows-static-md",
-        "VCPKG_HOST_TRIPLET": "x64-windows-static-md"
+        "CMAKE_MSVC_RUNTIME_LIBRARY": "MultiThreaded$<$<CONFIG:Debug>:Debug>DLL",
+        "CPM_SOURCE_CACHE": "${sourceDir}/build/.cpm"
       }
     },
     {
@@ -37,6 +29,25 @@
       "architecture": {
         "value": "x64",
         "strategy": "external"
+      }
+    },
+    {
+      "name": "clang-cl",
+      "hidden": true,
+      "generator": "Ninja",
+      "cmakeExecutable": "C:/Program Files/CMake/bin/",
+      "cacheVariables": {
+        "CMAKE_CXX_COMPILER": "clang-cl"
+      },
+      "environment": {
+        "COMMONLIBSF_COMPILER": "/cgthreads8 /diagnostics:caret /EHsc /fp:contract /fp:except- /guard:cf- /permissive- /sdl /W4 /Zc:__cplusplus /Zc:rvalueCast /Zc:ternary -Wno-unused-private-field -Wno-unused-parameter -Wno-overloaded-virtual -Wno-delete-non-abstract-non-virtual-dtor -Wno-unused-command-line-argument"
+      },
+      "vendor": {
+        "microsoft.com/VisualStudioSettings/CMake/1.0": {
+          "intelliSenseMode": "windows-clang-x64",
+          "enableMicrosoftCodeAnalysis": true,
+          "enableClangTidyCodeAnalysis": true
+        }
       }
     },
     {
@@ -56,8 +67,29 @@
       }
     },
     {
+      "name": "build-release-clang-cl",
+      "inherits": [ "base", "win32", "x64", "clang-cl" ],
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "RelWithDebInfo",
+        "CMAKE_CXX_FLAGS_RELWITHDEBINFO": "/fp:fast /GR- /Gw /O2"
+      },
+      "displayName": "Release",
+      "description": "Optimized release build.",
+      "binaryDir": "${sourceDir}/build/release-clang-cl"
+    },
+    {
+      "name": "build-debug-clang-cl",
+      "inherits": [ "base", "win32", "x64", "clang-cl" ],
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug"
+      },
+      "displayName": "Debug",
+      "description": "Debug build.",
+      "binaryDir": "${sourceDir}/build/debug-clang-cl"
+    },
+    {
       "name": "build-release-msvc",
-      "inherits": ["base", "vcpkg", "win32", "x64", "msvc"],
+      "inherits": [ "base", "win32", "x64", "msvc" ],
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "RelWithDebInfo",
         "CMAKE_CXX_FLAGS_RELWITHDEBINFO": "/fp:fast /GR- /Gw /O2 /Ob3 /Qpar",
@@ -69,7 +101,7 @@
     },
     {
       "name": "build-debug-msvc",
-      "inherits": ["base", "vcpkg", "win32", "x64", "msvc"],
+      "inherits": [ "base", "win32", "x64", "msvc" ],
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Debug",
         "CMAKE_SHARED_LINKER_FLAGS_DEBUG": "/DEBUGTYPE:FIXUP"
@@ -81,14 +113,26 @@
   ],
   "buildPresets": [
     {
+      "name": "release-clang-cl",
+      "displayName": "1. Release (clang-cl)",
+      "configurePreset": "build-release-clang-cl",
+      "description": "Optimized release build."
+    },
+    {
+      "name": "debug-clang-cl",
+      "displayName": "2. Debug (clang-cl)",
+      "configurePreset": "build-debug-clang-cl",
+      "description": "Debug build."
+    },
+    {
       "name": "release-msvc",
-      "displayName": "1. Release (MSVC)",
+      "displayName": "3. Release (MSVC)",
       "configurePreset": "build-release-msvc",
       "description": "Optimized release build."
     },
     {
       "name": "debug-msvc",
-      "displayName": "2. Debug (MSVC)",
+      "displayName": "4. Debug (MSVC)",
       "configurePreset": "build-debug-msvc",
       "description": "Debug build."
     }

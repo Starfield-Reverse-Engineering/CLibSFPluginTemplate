@@ -7,14 +7,14 @@
 
 ## Setup
 
-This template consumes CommonLibSF either as a vcpkg port or as a git submodule. When you run the project setup script, you will be prompted to choose between the two (the default is via vcpkg).
+This template consumes CommonLibSF as a CPM.cmake package, a git submodule, or a local fork. When you run the project setup script, you will be prompted to choose between the three (default is as a CPM package).
 
 A python script, `project_setup.py`, is provided which automates several housekeeping steps required to get the template development-ready (requires [Python](https://www.python.org/download)). To run the script:
 
 1. Run `cd .\CLibSFPluginTemplate\`
 2. Run `py .\project_setup.py`
 3. Choose how to consume CommonLibSF
-   1. Press `Enter` to use the default of consuming CommonLibSF via vcpkg
+   1. Press `Enter` to use the default of consuming CommonLibSF via CPM
    2. Enter `y` to consume CommonLibSF as a git submodule instead
 4. To use a local fork of CommonLibSF instead of the vcpkg port or a git submodule:
    1. Create a Windows environment variable called `CommonLibSFPath` that points to your local fork of CommonLibSF
@@ -33,6 +33,8 @@ A python script, `project_setup.py`, is provided which automates several houseke
   - `Release`: Optimized release build, produces small and fast DLLs with associated PDBs
   - `Debug`: Debug build, produces DLLs and PDBs with full debug info, allowing the use of an interactive debugger
 
+Variants of both of the above configs are provided which use MSVC (`cl/link`) and Clang (`clang-cl/lld-link`) respectively.
+
 ## Plugin configuration using an `.ini`
 
 Many CommonLib plugins expose settings through configuration files so that the user can control plugin behavior. This template includes [simpleini](https://github.com/brofield/simpleini) which allows you to read settings from the ini file in `contrib\config` (see `Settings.cpp`).
@@ -44,8 +46,6 @@ This template uses CommonLibSF's GPLv3 with exceptions. Per the license, **you m
 ## Dependencies
 
 - [CMake v3.27+](https://cmake.org/)
-- [vcpkg v2023.08.09+](https://github.com/microsoft/vcpkg/releases)
-  - Create a new Windows environment variable called `VCPKG_ROOT` which points to your vcpkg install directory
 - [Visual Studio 2022](https://visualstudio.microsoft.com/downloads/) with C++ workload
 - [Python](https://www.python.org/download)
-- [LLVM v17.0.0+](https://github.com/llvm/llvm-project/releases) (not really a dependency but nice to have)
+- [LLVM v17.0.0+](https://github.com/llvm/llvm-project/releases)

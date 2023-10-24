@@ -6,9 +6,6 @@ on:
     types: completed
   workflow_dispatch:
 
-env:
-  VCPKG_COMMIT_ID: e44d60e6bf0964064bf69667cd9f3e91dc383c7c
-
 jobs:
   test-build:
     runs-on: windows-latest
@@ -18,6 +15,9 @@ jobs:
         preset:
           - debug
           - release
+        compiler:
+          - msvc
+          - clang-cl
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -25,13 +25,13 @@ jobs:
       - name: Get CMake
         uses: lukka/get-cmake@latest
 
-      - name: Setup vcpkg
-        uses: lukka/run-vcpkg@v11.1
+      - name: Setup MSVC prompt
+        uses: TheMrMilchmann/setup-msvc-dev@v3
         with:
-          vcpkgGitCommitId: ${{ env.VCPKG_COMMIT_ID }}
+          arch: x64
+          toolset: 14.38
 
-      - name: Run CMake
-        uses: lukka/run-cmake@v10.6
-        with:
-          configurePreset: build-${{ matrix.preset }}-msvc
-          buildPreset: ${{ matrix.preset }}-msvc
+      - name: Build
+        run: |
+          cmake -B ./build --preset=build-${{ matrix.preset }}-${{ matrix.compiler }}
+          cmake --build ./build --preset=${{ matrix.preset }}-${{ matrix.compiler }}

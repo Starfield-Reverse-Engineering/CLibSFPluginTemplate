@@ -1,5 +1,4 @@
 cmake_minimum_required(VERSION 3.27)
-message("Using toolchain file ${CMAKE_TOOLCHAIN_FILE}.")
 
 ########################################################################################################################
 ## Define project
@@ -16,6 +15,13 @@ set(CMAKE_INTERPROCEDURAL_OPTIMIZATION_DEBUG OFF)
 set(CMAKE_OPTIMIZE_DEPENDENCIES ON)
 
 include(GNUInstallDirs)
+
+include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/CPM.cmake")
+
+CPMAddPackage("gh:Starfield-Reverse-Engineering/CommonLibSF#main")
+CPMAddPackage("gh:brofield/simpleini@4.20")
+
+include("${CommonLibSF_SOURCE_DIR}/CommonLibSF/cmake/CommonLibSF.cmake")
 
 configure_file(
   ${CMAKE_CURRENT_SOURCE_DIR}/cmake/version.rc.in
@@ -47,8 +53,6 @@ source_group(
 ########################################################################################################################
 ## Configure target DLL
 ########################################################################################################################
-find_package(CommonLibSF CONFIG REQUIRED)
-
 add_commonlibsf_plugin(
   ${PROJECT_NAME}
   AUTHOR AuthorName
@@ -57,15 +61,13 @@ add_commonlibsf_plugin(
 
 add_library("${PROJECT_NAME}::${PROJECT_NAME}" ALIAS "${PROJECT_NAME}")
 
-find_path(SIMPLEINI_INCLUDE_DIRS "SimpleIni.h")
-
 target_include_directories(
   ${PROJECT_NAME}
   PRIVATE
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>
     $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/src>
     $<INSTALL_INTERFACE:src>
-    ${SIMPLEINI_INCLUDE_DIRS}
+    ${SimpleIni_SOURCE_DIR}
   PUBLIC
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
 )
@@ -74,7 +76,7 @@ target_precompile_headers(
   ${PROJECT_NAME}
   PRIVATE
     include/PCH.h
-    ${SIMPLEINI_INCLUDE_DIRS}/SimpleIni.h
+    ${SimpleIni_SOURCE_DIR}/SimpleIni.h
 )
 
 install(
@@ -131,4 +133,8 @@ set_property(
 set_property(
   TARGET ${PROJECT_NAME}
   APPEND PROPERTY ADDITIONAL_CLEAN_FILES "${OUTPUT_PDBS}"
+)
+set_property(
+  TARGET ${PROJECT_NAME}
+  APPEND PROPERTY ADDITIONAL_CLEAN_FILES "${CMAKE_CURRENT_SOURCE_DIR}/build/.cpm"
 )
