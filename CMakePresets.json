@@ -12,8 +12,7 @@
       "cacheVariables": {
         "CMAKE_CXX_FLAGS": "$env{COMMONLIBSF_COMPILER} $env{COMMONLIBSF_PLATFORM} $penv{CXXFLAGS}",
         "CMAKE_SHARED_LINKER_FLAGS": "$env{COMMONLIBSF_LINKER} $penv{SHARED_LINKER_FLAGS}",
-        "CMAKE_MSVC_RUNTIME_LIBRARY": "MultiThreaded$<$<CONFIG:Debug>:Debug>DLL",
-        "CPM_SOURCE_CACHE": "${sourceDir}/build/.cpm"
+        "CMAKE_MSVC_RUNTIME_LIBRARY": "MultiThreaded$<$<CONFIG:Debug>:Debug>DLL"
       }
     },
     {
