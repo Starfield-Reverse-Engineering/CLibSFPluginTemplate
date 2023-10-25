@@ -7,7 +7,7 @@
 
 ## Setup
 
-This template consumes CommonLibSF as a CPM.cmake package, a git submodule, or a local fork. When you run the project setup script, you will be prompted to choose between the three (default is as a CPM package).
+This template consumes CommonLibSF as a [CPM](https://github.com/cpm-cmake/CPM.cmake) package, a git submodule, or a local fork. When you run the project setup script, you will be prompted to choose between the three (default is as a CPM package).
 
 A python script, `project_setup.py`, is provided which automates several housekeeping steps required to get the template development-ready (requires [Python](https://www.python.org/download)). To run the script:
 
