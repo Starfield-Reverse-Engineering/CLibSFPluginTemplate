@@ -5,6 +5,17 @@
 [![Game version](https://img.shields.io/badge/game%20version-1.7.36-orange)]()
 [![Test build](https://img.shields.io/github/actions/workflow/status/Starfield-Reverse-Engineering/CLibSFPluginTemplate/testbuild.yml)](https://github.com/Starfield-Reverse-Engineering/CLibSFPluginTemplate/actions/workflows/testbuild.yml)
 
+## Dependencies
+
+- [CMake v3.27+](https://cmake.org/)
+- [Visual Studio 2022](https://visualstudio.microsoft.com/downloads/) with C++ workload
+- [Python](https://www.python.org/download)
+- [LLVM v17.0.0+](https://github.com/llvm/llvm-project/releases)
+
+## License requirements
+
+This template uses CommonLibSF's [GPLv3 with exceptions](https://github.com/Starfield-Reverse-Engineering/CommonLibSF?tab=readme-ov-file#license). Per the license, **you must share the source code of your mod if you use CommonLibSF**. Violation of the license will result in your mod being taken down from the Nexus.
+
 ## Setup
 
 This template consumes CommonLibSF as a [CPM](https://github.com/cpm-cmake/CPM.cmake) package, a git submodule, or a local fork. When you run the project setup script, you will be prompted to choose between the three (default is as a CPM package).
@@ -38,14 +49,3 @@ Variants of both of the above configs are provided which use MSVC (`cl/link`) an
 ## Plugin configuration using an `.ini`
 
 Many CommonLib plugins expose settings through configuration files so that the user can control plugin behavior. This template includes [simpleini](https://github.com/brofield/simpleini) which allows you to read settings from the ini file in `contrib\config` (see `Settings.cpp`).
-
-## License requirements
-
-This template uses CommonLibSF's GPLv3 with exceptions. Per the license, **you must share the source code of your mod if you use CommonLibSF**. Violation of the license will result in your mod being taken down from the Nexus.
-
-## Dependencies
-
-- [CMake v3.27+](https://cmake.org/)
-- [Visual Studio 2022](https://visualstudio.microsoft.com/downloads/) with C++ workload
-- [Python](https://www.python.org/download)
-- [LLVM v17.0.0+](https://github.com/llvm/llvm-project/releases)
