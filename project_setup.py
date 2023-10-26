@@ -29,8 +29,12 @@ if not use_submodule:
             cmakelists = cmakelists_file.read()
 
         cmakelists = cmakelists.replace(
-            "find_package(CommonLibSF CONFIG REQUIRED)",
-            'add_subdirectory("$ENV{CommonLibSFPath}" CommonLibSF)\n'
+            'CPMAddPackage("gh:Starfield-Reverse-Engineering/CommonLibSF#main")',
+            'add_subdirectory("$ENV{CommonLibSFPath}" CommonLibSF)\n',
+        )
+
+        cmakelists = cmakelists.replace(
+            "include(${CommonLibSF_SOURCE_DIR}/CommonLibSF/cmake/CommonLibSF.cmake)",
             'include("$ENV{CommonLibSFPath}/CommonLibSF/cmake/CommonLibSF.cmake")',
         )
 
