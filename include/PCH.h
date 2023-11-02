@@ -160,6 +160,7 @@ protected:
 public:
     constexpr Singleton(const Singleton&)      = delete;
     constexpr Singleton(Singleton&&)           = delete;
+
     constexpr auto operator=(const Singleton&) = delete;
     constexpr auto operator=(Singleton&&)      = delete;
 

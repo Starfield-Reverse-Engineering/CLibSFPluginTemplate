@@ -4,13 +4,19 @@
 // SFSE message listener, use this to do stuff at specific moments during runtime
 void Listener(SFSE::MessagingInterface::Message* message) noexcept
 {
-    if (message->type <=> SFSE::MessagingInterface::kPostLoad == 0) {
+    switch (message->type) {
+    case SFSE::MessagingInterface::kPostLoad: {
     }
-    if (message->type <=> SFSE::MessagingInterface::kPostPostLoad == 0) {
+    case SFSE::MessagingInterface::kPostPostLoad: {
+    }
+    case SFSE::MessagingInterface::kPostDataLoad: {
         Settings::LoadSettings();
         Hooks::Install();
     }
-    if (message->type <=> SFSE::MessagingInterface::kPostDataLoad == 0) {
+    case SFSE::MessagingInterface::kPostPostDataLoad: {
+    }
+    default: {
+    }
     }
 }
 

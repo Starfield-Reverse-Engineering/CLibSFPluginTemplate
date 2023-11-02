@@ -1,13 +1,11 @@
 cmake_minimum_required(VERSION 3.27)
 
-########################################################################################################################
-## Define project
-########################################################################################################################
 project(
   PluginName
   VERSION 0.0.1
   LANGUAGES CXX
 )
+
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_INTERPROCEDURAL_OPTIMIZATION ON)
@@ -16,10 +14,11 @@ set(CMAKE_OPTIMIZE_DEPENDENCIES ON)
 
 include(GNUInstallDirs)
 
+# CPM
 include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/CPM.cmake)
-
 set(CPM_SOURCE_CACHE ${CMAKE_CURRENT_BINARY_DIR}/.cpm)
 
+# Dependencies
 CPMAddPackage("gh:Starfield-Reverse-Engineering/CommonLibSF#main")
 CPMAddPackage("gh:brofield/simpleini@4.20")
 
@@ -31,30 +30,25 @@ configure_file(
   @ONLY
 )
 
-set(PUBLIC_HEADER_DIR ${CMAKE_CURRENT_SOURCE_DIR}/include/${PROJECT_NAME})
-
-set(
+# Add headers
+file(
+  GLOB_RECURSE
   headers
-    include/Utility.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/*.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/*.hpp
 )
+list(REMOVE_ITEM headers ${CMAKE_CURRENT_SOURCE_DIR}/include/PCH.h)
 
-set(
+# Add sources
+file(
+  GLOB_RECURSE
   sources
-    src/Main.cpp
-    src/Settings.cpp
-    src/Hooks.cpp
-
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cc
     ${CMAKE_CURRENT_BINARY_DIR}/version.rc
 )
 
-source_group(
-  TREE ${CMAKE_CURRENT_SOURCE_DIR}
-  FILES ${headers} ${sources}
-)
-
-########################################################################################################################
-## Configure target DLL
-########################################################################################################################
+# Create plugin
 add_commonlibsf_plugin(
   ${PROJECT_NAME}
   AUTHOR AuthorName
@@ -69,7 +63,7 @@ target_include_directories(
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>
     $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/src>
     $<INSTALL_INTERFACE:src>
-    ${SimpleIni_SOURCE_DIR}
+    $<BUILD_INTERFACE:${SimpleIni_SOURCE_DIR}>
   PUBLIC
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
 )
@@ -82,18 +76,10 @@ target_precompile_headers(
 )
 
 install(
-  DIRECTORY ${PUBLIC_HEADER_DIR}
-  DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
-)
-
-install(
   TARGETS ${PROJECT_NAME}
   DESTINATION ${CMAKE_INSTALL_LIBDIR}
 )
 
-########################################################################################################################
-## Automatic plugin deployment
-########################################################################################################################
 if(CMAKE_BUILD_TYPE STREQUAL Debug)
   set(BUILD_NAME Debug)
 else()
@@ -113,8 +99,8 @@ add_custom_command(
     ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/contrib/Config/${PROJECT_NAME}.ini ${CMAKE_CURRENT_SOURCE_DIR}/contrib/Plugin${BUILD_NAME}/sfse/plugins
 )
 
-file(GLOB_RECURSE OUTPUT_DLLS ${CMAKE_CURRENT_SOURCE_DIR}/contrib/**/*.dll)
-file(GLOB_RECURSE OUTPUT_PDBS ${CMAKE_CURRENT_SOURCE_DIR}/contrib/**/*.pdb)
+file(GLOB_RECURSE OUTPUT_DLLS ${CMAKE_CURRENT_SOURCE_DIR}/contrib/*.dll)
+file(GLOB_RECURSE OUTPUT_PDBS ${CMAKE_CURRENT_SOURCE_DIR}/contrib/*.pdb)
 
 set_property(
   TARGET ${PROJECT_NAME}
