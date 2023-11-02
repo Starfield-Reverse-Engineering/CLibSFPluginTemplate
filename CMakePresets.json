@@ -13,7 +13,7 @@
         "WINDOWS_FLAGS": "-DWIN32_LEAN_AND_MEAN -DNOMINMAX"
       },
       "cacheVariables": {
-        "CMAKE_CXX_FLAGS": "/cgthreads8 /EHsc /fp:contract /fp:except- /W4 /Zc:__cplusplus $env{COMPILER_FLAGS} $env{WINDOWS_FLAGS} $penv{CXXFLAGS}",
+        "CMAKE_CXX_FLAGS": "/cgthreads8 /EHsc /fp:contract /fp:except- /W4 /Zc:__cplusplus /D_ITERATOR_DEBUG_LEVEL=0 $env{COMPILER_FLAGS} $env{WINDOWS_FLAGS} $penv{CXXFLAGS}",
         "CMAKE_SHARED_LINKER_FLAGS": "$env{COMMONLIBSF_LINKER} $penv{SHARED_LINKER_FLAGS}"
       },
       "cmakeExecutable": "C:/Program Files/CMake/bin/",
