@@ -8,6 +8,7 @@ on:
       - "src/**"
       - "CMakeLists.txt"
       - "CMakePresets.json"
+      - ".github/workflows/testbuild.yml"
   workflow_dispatch:
 
 jobs:
