@@ -7,19 +7,17 @@ void Settings::LoadSettings() noexcept
     CSimpleIniA ini;
 
     ini.SetUnicode();
-    if (ini.LoadFile(R"(.\Data\SFSE\Plugins\PluginName.ini)") <=> 0 < 0) {
-        logger::error("ERROR: Failed to load ini");
-        return;
-    }
+    ini.LoadFile(R"(.\Data\SKSE\Plugins\PluginName.ini)");
 
     debug_logging = ini.GetBoolValue("Log", "Debug");
 
     if (debug_logging) {
-        spdlog::set_level(spdlog::level::level_enum::debug);
+        spdlog::set_level(spdlog::level::debug);
         logger::debug("Debug logging enabled");
     }
 
-    // Load settings (see simpleini readme: https://github.com/brofield/simpleini)
+    // Load settings
 
     logger::info("Loaded settings");
+    logger::info("");
 }

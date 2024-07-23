@@ -24,6 +24,6 @@ namespace Hooks
             return fightReaction;
         }
 
-        inline static REL::Relocation<decltype(thunk)> func;
+        inline static REL::Relocation<decltype(&thunk)> func;
     };
 } // namespace Hooks

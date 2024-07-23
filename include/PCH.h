@@ -158,13 +158,12 @@ protected:
     constexpr ~Singleton() noexcept = default;
 
 public:
-    constexpr Singleton(const Singleton&) = delete;
-    constexpr Singleton(Singleton&&)      = delete;
-
+    constexpr Singleton(const Singleton&)      = delete;
+    constexpr Singleton(Singleton&&)           = delete;
     constexpr auto operator=(const Singleton&) = delete;
     constexpr auto operator=(Singleton&&)      = delete;
 
-    static constexpr auto GetSingleton() noexcept
+    [[nodiscard]] static constexpr T* GetSingleton() noexcept
     {
         static T singleton;
         return std::addressof(singleton);

@@ -2,15 +2,8 @@
 
 [![C++23](https://img.shields.io/static/v1?label=standard&message=c%2B%2B23&color=blue&logo=c%2B%2B&&logoColor=red&style=flat)](https://en.cppreference.com/w/cpp/compiler_support)
 [![Platform](https://img.shields.io/static/v1?label=platform&message=windows&color=dimgray&style=flat&logo=windows)]()
-[![Game version](https://img.shields.io/badge/game%20version-1.7.36-orange)]()
+[![Game version](https://img.shields.io/badge/game%20version-1.12.36-orange)]()
 [![Test build](https://img.shields.io/github/actions/workflow/status/Starfield-Reverse-Engineering/CLibSFPluginTemplate/testbuild.yml)](https://github.com/Starfield-Reverse-Engineering/CLibSFPluginTemplate/actions/workflows/testbuild.yml)
-
-## Dependencies
-
-- [CMake v3.27+](https://cmake.org/)
-- [Visual Studio 2022](https://visualstudio.microsoft.com/downloads/) with C++ workload
-- [Python](https://www.python.org/download)
-- [LLVM v17.0.0+](https://github.com/llvm/llvm-project/releases)
 
 ## License requirements
 
@@ -22,30 +15,27 @@ This template consumes CommonLibSF as a [CPM](https://github.com/cpm-cmake/CPM.c
 
 A python script, `project_setup.py`, is provided which automates several housekeeping steps required to get the template development-ready (requires [Python](https://www.python.org/download)). To run the script:
 
-1. Run `cd .\CLibSFPluginTemplate\`
-2. Run `py .\project_setup.py`
-3. Choose how to consume CommonLibSF
-   1. Press `Enter` to use the default of consuming CommonLibSF via CPM
-   2. Enter `y` to consume CommonLibSF as a git submodule instead
-4. To use a local fork of CommonLibSF instead of the vcpkg port or a git submodule:
-   1. Create a Windows environment variable called `CommonLibSFPath` that points to your local fork of CommonLibSF
-   2. Enter `y` when the setup script asks if you'd like to use a local fork
-5. Enter your project name (in CamelCase)
+1. If you want to use a local fork of CommonLibSF instead of a submodule, create a Windows environment variable called `CommonLibSFPath` that points to your local fork
+2. Run `cd .\CLibSFPluginTemplate\`
+3. Run `py .\project_setup.py`
+4. Enter your project name (in CamelCase)
+5. Choose how to consume CommonLibSF
+   1. Press `Enter` to use the default of consuming CommonLibSF via a local fork
+   2. Enter `n` to consume CommonLibSF as a git submodule instead
 
 ## Building your project
 
-- Visual Studio should prompt you to generate a CMake cache. Click on `Generate` and wait
-- One the CMake cache is generated, build your project
-- The `.dll` and `.pdb` files will be placed in `contrib\PluginRelease` or `contrib\PluginDebug` depending on your build configuration
+- Select one of the CMake presets (release or debug), configure, and build.
+- The .dll and .pdb files will be placed in `contrib\PluginRelease` or `contrib\PluginDebug` depending on your selected preset
 
-## Build configs
+## Requirements
 
-- Two build configs are provided:
-  - `Release`: Optimized release build, produces small and fast DLLs with associated PDBs
-  - `Debug`: Debug build, produces DLLs and PDBs with full debug info, allowing the use of an interactive debugger
+- [vcpkg](https://github.com/microsoft/vcpkg)
+  - Create a new environment variable called `VCPKG_ROOT` which points to your vcpkg install directory
+- [CMake](https://cmake.org/)
+- [LLVM](https://github.com/llvm/llvm-project/releases)
+- Visual Studio 2022 build tools
 
-Variants of both of the above configs are provided which use MSVC (`cl/link`) and Clang (`clang-cl/lld-link`) respectively.
+## Resources
 
-## Plugin configuration using an `.ini`
-
-Many CommonLib plugins expose settings through configuration files so that the user can control plugin behavior. This template includes [simpleini](https://github.com/brofield/simpleini) which allows you to read settings from the ini file in `contrib\config` (see `Settings.cpp`).
+- [Steamless](https://github.com/atom0s/Steamless/releases)

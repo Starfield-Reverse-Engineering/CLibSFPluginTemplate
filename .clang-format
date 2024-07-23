@@ -30,8 +30,10 @@ AlignOperands: Align
 AlignTrailingComments:
   Kind: Always
   OverEmptyLines: 0
+AllowShortCompoundRequirementOnASingleLine: true
 AllowShortEnumsOnASingleLine: false
 AllowShortFunctionsOnASingleLine: Inline
+AllowBreakBeforeNoexceptSpecifier: OnlyWithParen
 AlwaysBreakTemplateDeclarations: Yes
 AttributeMacros:
   - __declspec
@@ -60,6 +62,7 @@ BraceWrapping:
   SplitEmptyFunction: true
   SplitEmptyRecord: true
   SplitEmptyNamespace: true
+BreakAdjacentStringLiterals: false
 BreakBeforeBraces: Custom
 BreakConstructorInitializers: BeforeColon
 ColumnLimit: 180
