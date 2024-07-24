@@ -3,7 +3,6 @@
 [![C++23](https://img.shields.io/static/v1?label=standard&message=c%2B%2B23&color=blue&logo=c%2B%2B&&logoColor=red&style=flat)](https://en.cppreference.com/w/cpp/compiler_support)
 [![Platform](https://img.shields.io/static/v1?label=platform&message=windows&color=dimgray&style=flat&logo=windows)]()
 [![Game version](https://img.shields.io/badge/game%20version-1.12.36-orange)]()
-[![Test build](https://img.shields.io/github/actions/workflow/status/Starfield-Reverse-Engineering/CLibSFPluginTemplate/testbuild.yml)](https://github.com/Starfield-Reverse-Engineering/CLibSFPluginTemplate/actions/workflows/testbuild.yml)
 
 ## License requirements
 
@@ -11,7 +10,7 @@ This template uses CommonLibSF's [GPLv3 with exceptions](https://github.com/Star
 
 ## Setup
 
-This template consumes CommonLibSF as a [CPM](https://github.com/cpm-cmake/CPM.cmake) package, a git submodule, or a local fork. When you run the project setup script, you will be prompted to choose between the three (the default is as a CPM package).
+This template consumes CommonLibSF as a git submodule, or a local fork. When you run the project setup script, you will be prompted to choose between the two (the default is as a local fork).
 
 A python script, `project_setup.py`, is provided which automates several housekeeping steps required to get the template development-ready (requires [Python](https://www.python.org/download)). To run the script:
 

@@ -47,7 +47,7 @@ source_group(
 
 set(BUILD_TESTS OFF)
 add_subdirectory($ENV{CommonLibSFPath} CommonLibSF)
-include($ENV{CommonLibSFPath}/CommonLibSF/cmake/CommonLibSF.cmake)
+include($ENV{CommonLibSFPath}/cmake/CommonLibSF.cmake)
 
 add_commonlibsf_plugin(
   ${PROJECT_NAME}
