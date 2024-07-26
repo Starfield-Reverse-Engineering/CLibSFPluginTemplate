@@ -61,7 +61,7 @@ if from_path.lower() == "n":
         "add_subdirectory($ENV{CommonLibSFPath} CommonLibSF)",
         "add_subdirectory(extern/CommonLibSF)",
     )
-    cmakelists = cmakelists.replace("extern/CommonLibSF", "$ENV{CommonLibSFPath}")
+    cmakelists = cmakelists.replace("$ENV{CommonLibSFPath}", "extern/CommonLibSF")
 
 with open(
     os.path.join(cwd, "CMakeLists.txt"), "w", encoding="utf-8"
