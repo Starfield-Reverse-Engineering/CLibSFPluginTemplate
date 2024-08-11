@@ -5,6 +5,9 @@
 // Concepts library
 #include <concepts>
 
+// Coroutines library
+#include <coroutine>
+
 // Utilities library
 #include <any>
 #include <bitset>
@@ -67,6 +70,7 @@
 #include <forward_list>
 #include <list>
 #include <map>
+#include <mdspan>
 #include <queue>
 #include <set>
 #include <span>
@@ -113,7 +117,6 @@
 #include <spanstream>
 #include <sstream>
 #include <streambuf>
-#include <strstream>
 #include <syncstream>
 
 // Filesystem library
@@ -163,7 +166,7 @@ public:
     constexpr auto operator=(const Singleton&) = delete;
     constexpr auto operator=(Singleton&&)      = delete;
 
-    [[nodiscard]] static constexpr T* GetSingleton() noexcept
+    [[nodiscard]] static constexpr auto GetSingleton() noexcept
     {
         static T singleton;
         return std::addressof(singleton);

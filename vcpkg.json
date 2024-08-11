@@ -2,11 +2,17 @@
   "$schema": "https://raw.githubusercontent.com/microsoft/vcpkg-tool/main/docs/vcpkg.schema.json",
   "name": "plugin-name",
   "version-semver": "0.0.1",
-  "builtin-baseline": "853e515b2b512953a536f411d38f053a89de5b33",
+  "builtin-baseline": "e590c2b30c08caf1dd8d612ec602a003f9784b7d",
   "dependencies": [
     "fmt",
     "spdlog",
     "simpleini"
+  ],
+  "overrides": [
+    {
+      "name": "fmt",
+      "version": "10.2.1"
+    }
   ],
   "license": "GPL-3.0-or-later"
 }
