@@ -1,18 +1,15 @@
 {
   "$schema": "https://raw.githubusercontent.com/microsoft/vcpkg-tool/main/docs/vcpkg.schema.json",
-  "name": "plugin-name",
-  "version-semver": "0.0.1",
-  "builtin-baseline": "e590c2b30c08caf1dd8d612ec602a003f9784b7d",
-  "dependencies": [
-    "fmt",
-    "spdlog",
-    "simpleini"
-  ],
-  "overrides": [
-    {
-      "name": "fmt",
-      "version": "10.2.1"
-    }
-  ],
-  "license": "GPL-3.0-or-later"
+  "dependencies": ["spdlog", "simpleini"],
+  "builtin-baseline": "ab67d6306b5e9af69684af5ec761c97731e75834",
+  "vcpkg-configuration": {
+    "registries": [
+      {
+        "kind": "git",
+        "baseline": "4464251a08810053868f982a09db1f8cec4d9ee0",
+        "repository": "https://github.com/ThirdEyeSqueegee/vcpkg-ports",
+        "packages": ["spdlog"]
+      }
+    ]
+  }
 }

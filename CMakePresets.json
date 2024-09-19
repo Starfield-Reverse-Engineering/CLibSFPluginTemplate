@@ -17,10 +17,9 @@
     {
       "name": "vcpkg",
       "hidden": true,
+      "toolchainFile": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
       "cacheVariables": {
-        "CMAKE_TOOLCHAIN_FILE": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
-        "VCPKG_TARGET_TRIPLET": "x64-windows-static-md",
-        "VCPKG_HOST_TRIPLET": "x64-windows-static-md"
+        "VCPKG_OVERLAY_TRIPLETS": "${sourceDir}/cmake"
       }
     },
     {
@@ -62,7 +61,9 @@
       "name": "build-release-msvc",
       "inherits": ["base", "vcpkg", "win32", "x64", "msvc"],
       "cacheVariables": {
-        "CMAKE_BUILD_TYPE": "RelWithDebInfo"
+        "CMAKE_BUILD_TYPE": "RelWithDebInfo",
+        "VCPKG_TARGET_TRIPLET": "x64-windows-skse",
+        "VCPKG_HOST_TRIPLET": "x64-windows-skse"
       },
       "displayName": "Release",
       "description": "Optimized release build.",
@@ -72,7 +73,9 @@
       "name": "build-debug-msvc",
       "inherits": ["base", "vcpkg", "win32", "x64", "msvc"],
       "cacheVariables": {
-        "CMAKE_BUILD_TYPE": "Debug"
+        "CMAKE_BUILD_TYPE": "Debug",
+        "VCPKG_TARGET_TRIPLET": "x64-windows-static-md",
+        "VCPKG_HOST_TRIPLET": "x64-windows-static-md"
       },
       "displayName": "Debug",
       "description": "Debug build.",
