@@ -5,13 +5,7 @@ namespace Hooks
 {
     void Install() noexcept;
 
-    enum class FIGHT_REACTION
-    {
-        kNeutral = 0,
-        kEnemy,
-        kAlly,
-        kFriend
-    };
+    enum class FIGHT_REACTION { kNeutral = 0, kEnemy, kAlly, kFriend };
 
     // Example hook from https://github.com/powerof3/SimpleOffenceSuppressionSFSE
     class GetFactionFightReaction : public Singleton<GetFactionFightReaction>

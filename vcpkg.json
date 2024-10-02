@@ -1,12 +1,18 @@
 {
   "$schema": "https://raw.githubusercontent.com/microsoft/vcpkg-tool/main/docs/vcpkg.schema.json",
-  "dependencies": ["spdlog", "simpleini"],
-  "builtin-baseline": "ab67d6306b5e9af69684af5ec761c97731e75834",
+  "dependencies": ["commonlibsf", "simpleini"],
+  "builtin-baseline": "f0f811770e0538fcb295a1750c0a5e0de5131d29",
   "vcpkg-configuration": {
     "registries": [
       {
         "kind": "git",
-        "baseline": "4464251a08810053868f982a09db1f8cec4d9ee0",
+        "baseline": "46efc9caa5fb71cc9322ee7bb0bb9423dc980342",
+        "repository": "https://github.com/Starfield-Reverse-Engineering/CommonLibSF-vcpkg",
+        "packages": ["commonlibsf"]
+      },
+      {
+        "kind": "git",
+        "baseline": "e376718dc96bd2a6431cc8f7b05eca555d51a123",
         "repository": "https://github.com/ThirdEyeSqueegee/vcpkg-ports",
         "packages": ["spdlog"]
       }

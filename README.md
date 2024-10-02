@@ -2,7 +2,7 @@
 
 [![C++23](https://img.shields.io/static/v1?label=standard&message=c%2B%2B23&color=blue&logo=c%2B%2B&&logoColor=red&style=flat)](https://en.cppreference.com/w/cpp/compiler_support)
 [![Platform](https://img.shields.io/static/v1?label=platform&message=windows&color=dimgray&style=flat&logo=windows)]()
-[![Game version](https://img.shields.io/badge/game%20version-1.12.36-orange)]()
+[![Game version](https://img.shields.io/badge/game%20version-1.14.70-orange)]()
 
 ## License requirements
 
@@ -10,17 +10,12 @@ This template uses CommonLibSF's [GPLv3 with exceptions](https://github.com/Star
 
 ## Setup
 
-This template consumes CommonLibSF as a git submodule, or a local fork. When you run the project setup script, you will be prompted to choose between the two (the default is as a local fork).
+- Clone the repository
+- Optional:
+  - Run `cd CLibNGPluginTemplate`
+  - Run `py project_setup.py` (requires [Python 3.12+](https://www.python.org/download/pre-releases/))
 
-A python script, `project_setup.py`, is provided which automates several housekeeping steps required to get the template development-ready (requires [Python](https://www.python.org/download)). To run the script:
-
-1. If you want to use a local fork of CommonLibSF instead of a submodule, create a Windows environment variable called `CommonLibSFPath` that points to your local fork
-2. Run `cd .\CLibSFPluginTemplate\`
-3. Run `py .\project_setup.py`
-4. Enter your project name (in CamelCase)
-5. Choose how to consume CommonLibSF
-   1. Press `Enter` to use the default of consuming CommonLibSF via a local fork
-   2. Enter `n` to consume CommonLibSF as a git submodule instead
+**NOTE**: You should run `vcpkg x-update-baseline` (in the project's root directory) often to make sure that vcpkg is fetching the latest versions of CommonLibSSE-NG and other dependencies
 
 ## Building your project
 
@@ -31,7 +26,7 @@ A python script, `project_setup.py`, is provided which automates several houseke
 
 - [vcpkg](https://github.com/microsoft/vcpkg)
   - Create a new environment variable called `VCPKG_ROOT` which points to your vcpkg install directory
-- [CMake](https://cmake.org/)
+- [CMake](https://cmake.org)
 - [LLVM](https://github.com/llvm/llvm-project/releases)
 - Visual Studio 2022 build tools
 

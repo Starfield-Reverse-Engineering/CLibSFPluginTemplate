@@ -25,16 +25,6 @@ project_name = input("Enter project name: ")
 author = input("Enter author: ")
 print()
 
-# Choose how to consume CommonLibSF
-from_path = input("Use CommonLibSF from path? (Y/n): ")
-if from_path == "" or from_path.lower() == "y":
-    print(f"Using CommonLibSF from path {environ["CommonLibSFPath"]}")
-elif from_path.lower() == "n":
-    print("Using CommonLibSF as submodule")
-else:
-    print("Invalid input")
-    exit()
-
 # Update CMakeLists.txt
 with open("CMakeLists.txt", "r", encoding="utf-8") as f:
     cmakelists = f.read()
@@ -42,13 +32,6 @@ with open("CMakeLists.txt", "r", encoding="utf-8") as f:
 cmakelists = cmakelists.replace("PluginName", project_name)
 cmakelists = cmakelists.replace("AuthorName", author)
 cmakelists = cmakelists.replace("0.0.1", "1.0.0")
-
-if from_path.lower() == "n":
-    cmakelists = cmakelists.replace(
-        "add_subdirectory($ENV{CommonLibSFPath} CommonLibSF)",
-        "add_subdirectory(extern/CommonLibSF)",
-    )
-    cmakelists = cmakelists.replace("$ENV{CommonLibSFPath}", "extern/CommonLibSF")
 
 with open("CMakeLists.txt", "w", encoding="utf-8") as f:
     f.write(cmakelists)
@@ -75,21 +58,6 @@ print()
 
 # Initialize empty git repo
 run(["git", "init"])
-
-# Initialize CommonLibSF submodule if chosen
-if from_path.lower() == "n":
-    print("\nInitializing CommonLibSF submodule...")
-    run(
-        [
-            "git",
-            "submodule",
-            "add",
-            "https://github.com/Starfield-Reverse-Engineering/CommonLibSF",
-            "extern/CommonLibSF",
-        ]
-    )
-
-    run(["git", "submodule", "update", "--init", "--recursive"])
 
 # Self-destruct
 remove(__file__)
