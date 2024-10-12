@@ -14,7 +14,7 @@ This template uses CommonLibSF's [GPLv3 with exceptions](https://github.com/Star
 - Run `cd CLibSFPluginTemplate`
 - Run `py project_setup.py` (requires [Python 3.12+](https://www.python.org/download/pre-releases/))
 
-**NOTE**: You should run `vcpkg x-update-baseline` (in the project's root directory) often to make sure that vcpkg is fetching the latest versions of CommonLibSSE-NG and other dependencies
+**NOTE**: You should run `vcpkg x-update-baseline` (in the project's root directory) often to make sure that vcpkg is fetching the latest versions of CommonLibSF and other dependencies
 
 ## Building your project
 
